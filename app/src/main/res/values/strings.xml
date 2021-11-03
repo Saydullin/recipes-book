@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Recipes</string>
+    <string name="recipes_book">Recipes Book</string>
+    <string name="font_normal">sans-serif</string>
+    <string name="submit_button">Done</string>
+    <string name="search_text">Search recipes and ingredients</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="get_back">Get Back</string>
+    <string name="welcome_to_recipes_book">Welcome to Recipes Book</string>
+    <string name="salads_text">Salads</string>
+    <string name="soups_text">Soups</string>
+    <string name="desert_text">Deserts</string>
+    <string name="image">image</string>
+    <string name="form_submit">Done</string>
+
+    <!--    font sizes    -->
+    <string name="font_size_thin">10sp</string>
+    <string name="font_size_normal">14sp</string>
+    <string name="font_size_medium">16sp</string>
+    <string name="font_size_big">18sp</string>
+    <string name="font_size_bold">20sp</string>
+    <string name="name_text">Name</string>
+    <string name="email_text">Email</string>
+    <string name="email_example">josh@email.com</string>
+    <string name="josh_example">Josh</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="ingredients_text">Ingredients</string>
+</resources>
+
+
