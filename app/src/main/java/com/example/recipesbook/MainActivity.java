@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.view.View;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.recipesbook.adapters.RecipesAdapter;
+import com.example.recipesbook.db.DbRecipe;
 import com.example.recipesbook.models.Recipe;
 
 import org.json.JSONException;
@@ -40,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     RecipesAdapter recipesAdapter;
     private TextView textViewResult;
     ImageButton button_login;
+    ImageButton button_add_recipe;
+
+    DbRecipe dbRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +55,38 @@ public class MainActivity extends AppCompatActivity {
         setRecipes();
 
         button_login = findViewById(R.id.button_login);
+        button_add_recipe = findViewById(R.id.button_add_recipe);
 
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SQLiteDatabase database = dbRecipe.getWritableDatabase();
+
+                ContentValues contentValues = new ContentValues();
+
+                contentValues.put(DbRecipe.KEY_NAME, "Saydullin");
+                contentValues.put(DbRecipe.KEY_MAIL, "saydullinweb@gmail.com");
+
+                database.insert(DbRecipe.TABLE_RECIPES, null, contentValues);
+
                 setContentView(R.layout.login);
             }
         });
 
+        dbRecipe = new DbRecipe(this);
+
+        button_add_recipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setActivityAddRecipe();
+            }
+        });
+
+    }
+
+    private void setActivityAddRecipe() {
+        Intent intent = new Intent(this, AddRecipe.class);
+        startActivity(intent);
     }
 
     private void setRecipeRecycle(List<Recipe> recipeList) {

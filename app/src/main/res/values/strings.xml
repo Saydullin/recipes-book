@@ -33,6 +33,9 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="ingredients_text">Ingredients</string>
+    <string name="add_new_recipe">Add new recipe</string>
+    <string name="title_text">Title</string>
+    <string name="description_text">Description</string>
 </resources>
 
 
