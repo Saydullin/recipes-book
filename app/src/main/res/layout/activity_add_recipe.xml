@@ -4,47 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingVertical="15dp"
     android:paddingHorizontal="15dp"
+    android:paddingVertical="15dp"
+    android:background="@color/theme_bg"
     tools:context=".AddRecipe">
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="15dp"
         android:fontFamily="@font/montserrat_bold"
-        android:layout_marginTop="15dp"
         android:text="@string/add_new_recipe"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editText2"
+    <LinearLayout
+        android:id="@+id/inputsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
-        android:textSize="16sp"
-        android:layout_marginTop="15dp"
-        android:autofillHints="default"
-        android:hint="@string/title_text"
-        android:inputType="text"
+        android:orientation="vertical"
+        android:layout_marginVertical="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-    <EditText
-        android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:autofillHints="default"
+            android:background="@drawable/border_radius"
+            android:defaultFocusHighlightEnabled="false"
+            android:backgroundTint="@color/theme_bg_light"
+            android:fontFamily="@font/montserrat"
+            android:hint="@string/title_text"
+            android:inputType="text"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="15dp"
+            android:textSize="16sp" />
+
+<!--        TODO: Реализовать добавление описания, путём шаговой инструкции -->
+<!--         Пользователь вводит 5 - появляются 5 штук (шагов) EditText -->
+<!--          И у каждого нумерация (Шаг 1, ...), в виде заголовка. -->
+
+<!--        <EditText-->
+<!--            android:id="@+id/editText2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:autofillHints="default"-->
+<!--            android:background="@drawable/border_radius"-->
+<!--            android:backgroundTint="@color/theme_bg_light"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:hint="@string/steps_amount"-->
+<!--            android:inputType="number"-->
+<!--            android:paddingHorizontal="15dp"-->
+<!--            android:paddingVertical="15dp"-->
+<!--            android:textSize="16sp" />-->
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="15dp"
+            android:autofillHints="default"
+            android:gravity="start"
+            android:background="@drawable/border_radius"
+            android:backgroundTint="@color/theme_bg_light"
+            android:fontFamily="@font/montserrat"
+            android:hint="@string/description_text"
+            android:inputType="text"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="15dp"
+            android:textSize="16sp" />
+
+<!--        TODO: Реализовать добавления ингредиентов в виде списка-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:autofillHints="default"
-        android:hint="@string/description_text"
-        android:fontFamily="@font/montserrat"
-        android:textSize="16sp"
-        android:inputType="text"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/inputsList">
+
+        <Button
+            android:id="@+id/button_cancel_activity"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:text="@string/cancel_text" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:text="@string/submit_button" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

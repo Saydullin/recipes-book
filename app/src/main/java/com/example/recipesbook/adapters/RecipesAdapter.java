@@ -50,24 +50,21 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         holder.recipeDuration.setText(recipes.get(position).getDuration());
         holder.recipesIngredientsAmount.setText(recipes.get(position).getIngredientsAmount() + " ingredients");
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, RecipeItem.class);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, RecipeItem.class);
 
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
-                        (Activity) context,
-                        new Pair<View, String>(holder.recipeImageCard, "ImageTransform")
-                );
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
+                    (Activity) context,
+                    new Pair<View, String>(holder.recipeImageCard, "ImageTransform")
+            );
 
-                intent.putExtra("recipeImage", recipes.get(position).getImg());
-                intent.putExtra("recipeTitle", recipes.get(position).getTitle());
-                intent.putExtra("recipeDuration", recipes.get(position).getDuration());
-                intent.putExtra("recipeIngredients", recipes.get(position).getIngredientsAmount());
-                intent.putExtra("recipeDescription", recipes.get(position).getDescription());
+            intent.putExtra("recipeImage", recipes.get(position).getImg());
+            intent.putExtra("recipeTitle", recipes.get(position).getTitle());
+            intent.putExtra("recipeDuration", recipes.get(position).getDuration());
+            intent.putExtra("recipeIngredients", recipes.get(position).getIngredientsAmount());
+            intent.putExtra("recipeDescription", recipes.get(position).getDescription());
 
-                context.startActivity(intent, options.toBundle());
-            }
+            context.startActivity(intent, options.toBundle());
         });
     }
 

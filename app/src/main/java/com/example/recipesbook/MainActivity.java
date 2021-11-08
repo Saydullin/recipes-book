@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
                 database.insert(DbRecipe.TABLE_RECIPES, null, contentValues);
 
-                setContentView(R.layout.login);
+//                setContentView(R.layout.login);
             }
         });
 

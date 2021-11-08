@@ -36,6 +36,8 @@
     <string name="add_new_recipe">Add new recipe</string>
     <string name="title_text">Title</string>
     <string name="description_text">Description</string>
+    <string name="cancel_text">cancel</string>
+    <string name="steps_amount">Steps amount</string>
 </resources>
 
 
