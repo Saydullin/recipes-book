@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.recipesbook.db.DbRecipe;
+import com.example.recipesbook.db.Recipe;
 
 public class AddRecipe extends AppCompatActivity {
 
@@ -65,8 +66,12 @@ public class AddRecipe extends AppCompatActivity {
         });
 
         submit_add_recipe.setOnClickListener(v -> {
+            Recipe rec = new Recipe();
+
             String title = recipeTitle.getText().toString();
             String description = recipeDescription.getText().toString();
+
+            rec.add(45, 43, "ef", "title", "desc");
 
             SQLiteDatabase database1 = dbRecipe.getWritableDatabase();
 
