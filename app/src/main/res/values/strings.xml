@@ -3,7 +3,7 @@
     <string name="recipes_book">Recipes Book</string>
     <string name="font_normal">sans-serif</string>
     <string name="submit_button">Done</string>
-    <string name="search_text">Search recipes and ingredients</string>
+    <string name="search_text">Search recipes</string>
     <string name="sign_up">Sign Up</string>
     <string name="get_back">Get Back</string>
     <string name="welcome_to_recipes_book">Welcome to Recipes Book</string>
@@ -38,6 +38,8 @@
     <string name="description_text">Description</string>
     <string name="cancel_text">cancel</string>
     <string name="steps_amount">Steps amount</string>
+    <string name="ingredients_amount_text">Ingredients amount</string>
+    <string name="duration_text">Duration (min). Enter «90» for ‹1h 30min›</string>
 </resources>
 
 

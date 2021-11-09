@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'org.sonarqube'
 }
 
 android {
@@ -21,12 +22,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding true
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "RecipesBook"
+        property "sonar.projectKey", "RecipesBook"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.language", "java"
+        property "sonar.sources", "src/main/java"
+        property "sonar.java.sources", "src/main/java"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.login", "admin"
+        property "sonar.password", "admin"
     }
 }
 

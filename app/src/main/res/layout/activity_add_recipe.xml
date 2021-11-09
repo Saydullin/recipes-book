@@ -1,114 +1,169 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8" ?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="15dp"
-    android:paddingVertical="15dp"
     android:background="@color/theme_bg"
-    tools:context=".AddRecipe">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="15dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="@string/add_new_recipe"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/inputsList"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginVertical="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="15dp"
+        tools:context=".AddRecipe">
 
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:autofillHints="default"
-            android:background="@drawable/border_radius"
-            android:defaultFocusHighlightEnabled="false"
-            android:backgroundTint="@color/theme_bg_light"
-            android:fontFamily="@font/montserrat"
-            android:hint="@string/title_text"
-            android:inputType="text"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="15dp"
-            android:textSize="16sp" />
-
-<!--        TODO: Реализовать добавление описания, путём шаговой инструкции -->
-<!--         Пользователь вводит 5 - появляются 5 штук (шагов) EditText -->
-<!--          И у каждого нумерация (Шаг 1, ...), в виде заголовка. -->
-
-<!--        <EditText-->
-<!--            android:id="@+id/editText2"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:autofillHints="default"-->
-<!--            android:background="@drawable/border_radius"-->
-<!--            android:backgroundTint="@color/theme_bg_light"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="@string/steps_amount"-->
-<!--            android:inputType="number"-->
-<!--            android:paddingHorizontal="15dp"-->
-<!--            android:paddingVertical="15dp"-->
-<!--            android:textSize="16sp" />-->
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="15dp"
-            android:autofillHints="default"
-            android:gravity="start"
-            android:background="@drawable/border_radius"
-            android:backgroundTint="@color/theme_bg_light"
-            android:fontFamily="@font/montserrat"
-            android:hint="@string/description_text"
-            android:inputType="text"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="15dp"
-            android:textSize="16sp" />
-
-<!--        TODO: Реализовать добавления ингредиентов в виде списка-->
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputsList">
-
-        <Button
-            android:id="@+id/button_cancel_activity"
-            style="?android:attr/buttonBarButtonStyle"
+        <TextView
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:text="@string/cancel_text" />
+            android:layout_marginVertical="15dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/add_new_recipe"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <LinearLayout
+            android:id="@+id/inputsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp">
+
+                <ImageView
+                    android:id="@+id/recipeImagePreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:src="@drawable/ic_food_preview"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/add_new_recipe" />
+
+            </androidx.cardview.widget.CardView>
+
+            <EditText
+                android:id="@+id/recipeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:autofillHints="default"
+                android:background="@drawable/border_radius"
+                android:backgroundTint="@color/theme_bg_light"
+                android:fontFamily="@font/montserrat"
+                android:hint="@string/title_text"
+                android:inputType="text"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
+                android:textSize="16sp" />
+
+            <!--        TODO: Реализовать добавление описания, путём шаговой инструкции -->
+            <!--         Пользователь вводит 5 - появляются 5 штук (шагов) EditText -->
+            <!--          И у каждого нумерация (Шаг 1, ...), в виде заголовка. -->
+
+            <!--        <EditText-->
+            <!--            android:id="@+id/editText2"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginTop="15dp"-->
+            <!--            android:autofillHints="default"-->
+            <!--            android:background="@drawable/border_radius"-->
+            <!--            android:backgroundTint="@color/theme_bg_light"-->
+            <!--            android:fontFamily="@font/montserrat"-->
+            <!--            android:hint="@string/steps_amount"-->
+            <!--            android:inputType="number"-->
+            <!--            android:paddingHorizontal="15dp"-->
+            <!--            android:paddingVertical="15dp"-->
+            <!--            android:textSize="16sp" />-->
+
+            <!--        TODO: Здесь будет селект категорий-->
+
+            <EditText
+                android:id="@+id/recipeIngredientsAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:autofillHints="default"
+                android:gravity="start"
+                android:background="@drawable/border_radius"
+                android:backgroundTint="@color/theme_bg_light"
+                android:fontFamily="@font/montserrat"
+                android:hint="@string/ingredients_amount_text"
+                android:inputType="number"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/recipeDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:autofillHints="default"
+                android:gravity="start"
+                android:background="@drawable/border_radius"
+                android:backgroundTint="@color/theme_bg_light"
+                android:fontFamily="@font/montserrat"
+                android:hint="@string/duration_text"
+                android:inputType="number"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/recipeDescription"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints="default"
+                android:gravity="start"
+                android:background="@drawable/border_radius"
+                android:backgroundTint="@color/theme_bg_light"
+                android:fontFamily="@font/montserrat"
+                android:hint="@string/description_text"
+                android:inputType="text"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
+                android:textSize="16sp" />
+
+            <!--        TODO: Реализовать добавления ингредиентов в виде списка-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:text="@string/submit_button" />
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputsList">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/button_cancel_activity"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:text="@string/cancel_text" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/submit_add_recipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:text="@string/submit_button" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+</ScrollView>
