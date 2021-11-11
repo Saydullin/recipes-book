@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.recipesbook.db.DbRecipe;
 import com.example.recipesbook.db.Recipe;
+import com.example.recipesbook.utils.Validator;
 
 public class AddRecipe extends AppCompatActivity {
 
@@ -27,7 +28,9 @@ public class AddRecipe extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1001;
 
     EditText recipeTitle;
+    EditText recipeDuration;
     EditText recipeDescription;
+    EditText recipeIngredientsAmount;
     Button button_cancel_activity;
     Button submit_add_recipe;
     ImageView recipeImagePreview;
@@ -42,10 +45,13 @@ public class AddRecipe extends AppCompatActivity {
         dbRecipe = new DbRecipe(this);
 
         recipeTitle = findViewById(R.id.recipeTitle);
+        recipeDuration = findViewById(R.id.recipeDuration);
         recipeDescription = findViewById(R.id.recipeDescription);
+        recipeImagePreview = findViewById(R.id.recipeImagePreview);
+        recipeIngredientsAmount = findViewById(R.id.recipeIngredientsAmount);
+
         button_cancel_activity = findViewById(R.id.button_cancel_activity);
         submit_add_recipe = findViewById(R.id.submit_add_recipe);
-        recipeImagePreview = findViewById(R.id.recipeImagePreview);
 
         button_cancel_activity.setOnClickListener(v -> finish());
 
@@ -57,7 +63,7 @@ public class AddRecipe extends AppCompatActivity {
                     String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
                     requestPermissions(permissions, PERMISSION_CODE);
                 } else {
-                    Toast.makeText(AddRecipe.this, "Permission given", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddRecipe.this, "Choose 300x200 image", Toast.LENGTH_SHORT).show();
                     pickImageFromGallery();
                 }
             } else {
@@ -66,19 +72,38 @@ public class AddRecipe extends AppCompatActivity {
         });
 
         submit_add_recipe.setOnClickListener(v -> {
-            Recipe rec = new Recipe();
+            Recipe recipeManager = new Recipe(this);
+            Validator validate = new Validator(this);
+
+            String validateImage = recipeImagePreview.getResources().toString();
+            String validateTitle = recipeTitle.getText().toString();
+            String validateDescription= recipeDescription.getText().toString();
+            int validateDuration = Integer.parseInt(recipeDuration.getText().toString());
+            int validateIngredientsAmount = Integer.parseInt(recipeIngredientsAmount.getText().toString());
+
+            try {
+                // Validate received data from user
+                validate.checkString("image", validateImage, new int[] {5, -1});
+                validate.checkString("title", validateTitle, new int[] {3, 15});
+                validate.checkInt("ingredients amount", validateIngredientsAmount, new int[] {2, 50});
+                validate.checkInt("duration", validateDuration, new int[] {5, 1440});
+                validate.checkString("description", validateDescription, new int[] {50, 400});
+
+                // Add data to database
+                recipeManager.add(validateImage, validateTitle, validateIngredientsAmount, validateDuration, validateDescription);
+            } catch (Exception e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
 
             String title = recipeTitle.getText().toString();
             String description = recipeDescription.getText().toString();
-
-            rec.add(45, 43, "ef", "title", "desc");
 
             SQLiteDatabase database1 = dbRecipe.getWritableDatabase();
 
             ContentValues contentValues = new ContentValues();
 
-            contentValues.put(DbRecipe.KEY_NAME, title);
-            contentValues.put(DbRecipe.KEY_MAIL, description);
+//            contentValues.put(DbRecipe.KEY_NAME, title);
+//            contentValues.put(DbRecipe.KEY_MAIL, description);
 
             database1.insert(DbRecipe.TABLE_RECIPES, null, contentValues);
 
@@ -88,7 +113,7 @@ public class AddRecipe extends AppCompatActivity {
 
             if (cursor.moveToFirst()) {
                 int idIndex = cursor.getColumnIndex(DbRecipe.KEY_ID);
-                int nameIndex = cursor.getColumnIndex(DbRecipe.KEY_NAME);
+                int nameIndex = cursor.getColumnIndex(DbRecipe.KEY_TITLE);
                 int emailIndex = cursor.getColumnIndex(DbRecipe.KEY_MAIL);
 
                 do {

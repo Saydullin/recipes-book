@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Recipes</string>
     <string name="recipes_book">Recipes Book</string>
     <string name="font_normal">sans-serif</string>
@@ -10,7 +10,7 @@
     <string name="salads_text">Salads</string>
     <string name="soups_text">Soups</string>
     <string name="desert_text">Deserts</string>
-    <string name="image">image</string>
+    <string name="image">Image</string>
     <string name="form_submit">Done</string>
 
     <!--    font sizes    -->
@@ -33,13 +33,17 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="ingredients_text">Ingredients</string>
+    <string name="ingredients_text_ex">Rice</string>
     <string name="add_new_recipe">Add new recipe</string>
     <string name="title_text">Title</string>
+    <string name="title_text_ex">Rice Soup</string>
     <string name="description_text">Description</string>
-    <string name="cancel_text">cancel</string>
+    <string name="description_text_ex">First of all, take the rice and wash it until …</string>
+    <string name="cancel_text" tools:ignore="ButtonCase">cancel</string>
     <string name="steps_amount">Steps amount</string>
-    <string name="ingredients_amount_text">Ingredients amount</string>
+    <string name="ingredients_amount_text">Ingredients amount (2 – 50)</string>
     <string name="duration_text">Duration (min). Enter «90» for ‹1h 30min›</string>
+    <string name="duration_text_ex">120</string>
 </resources>
 
 

@@ -35,6 +35,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/image"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,31 +52,40 @@
                 <ImageView
                     android:id="@+id/recipeImagePreview"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:src="@drawable/ic_food_preview"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/add_new_recipe" />
 
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/title_text"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp" />
+
             <EditText
                 android:id="@+id/recipeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:autofillHints="default"
                 android:background="@drawable/border_radius"
                 android:backgroundTint="@color/theme_bg_light"
                 android:fontFamily="@font/montserrat"
-                android:hint="@string/title_text"
+                android:hint="@string/title_text_ex"
                 android:inputType="text"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="15dp"
                 android:textSize="16sp" />
 
             <!--        TODO: Реализовать добавление описания, путём шаговой инструкции -->
-            <!--         Пользователь вводит 5 - появляются 5 штук (шагов) EditText -->
-            <!--          И у каждого нумерация (Шаг 1, ...), в виде заголовка. -->
+            <!--         Пользователь вводит первый ингредиент, и сразу же появляется -->
+            <!--         второе поле, и у каждого нумерация (Шаг 1, ...), в виде заголовка. -->
+            <!--         с отступом слева. -->
 
             <!--        <EditText-->
             <!--            android:id="@+id/editText2"-->
@@ -86,11 +104,19 @@
 
             <!--        TODO: Здесь будет селект категорий-->
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/ingredients_amount_text"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp" />
+
             <EditText
                 android:id="@+id/recipeIngredientsAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:autofillHints="default"
                 android:gravity="start"
                 android:background="@drawable/border_radius"
@@ -102,33 +128,49 @@
                 android:paddingVertical="15dp"
                 android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/duration_text"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp" />
+
             <EditText
                 android:id="@+id/recipeDuration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:autofillHints="default"
                 android:gravity="start"
                 android:background="@drawable/border_radius"
                 android:backgroundTint="@color/theme_bg_light"
                 android:fontFamily="@font/montserrat"
-                android:hint="@string/duration_text"
+                android:hint="@string/duration_text_ex"
                 android:inputType="number"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="15dp"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/description_text"
+                android:fontFamily="@font/montserrat"
                 android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/recipeDescription"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="15dp"
                 android:autofillHints="default"
                 android:gravity="start"
                 android:background="@drawable/border_radius"
                 android:backgroundTint="@color/theme_bg_light"
                 android:fontFamily="@font/montserrat"
-                android:hint="@string/description_text"
+                android:hint="@string/description_text_ex"
                 android:inputType="text"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="15dp"
@@ -152,14 +194,14 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
+                android:layout_marginHorizontal="30dp"
                 android:text="@string/cancel_text" />
 
             <Button
                 android:id="@+id/submit_add_recipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
+                android:layout_marginHorizontal="30dp"
                 android:text="@string/submit_button" />
 
         </LinearLayout>

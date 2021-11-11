@@ -15,7 +15,11 @@ public class DbRecipe extends SQLiteOpenHelper {
     public static final String TABLE_RECIPES = "recipes";
 
     public static final String KEY_ID = "_id";
-    public static final String KEY_NAME = "name";
+    public static final String KEY_IMAGE = "image";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_DURATION = "duration";
+    public static final String KEY_DESCRIPTION = "name";
+    public static final String KEY_INGREDIENTS_AMOUNT = "ingredients_amount";
     public static final String KEY_MAIL = "email";
 
     public DbRecipe(@Nullable Context context) {
@@ -24,13 +28,20 @@ public class DbRecipe extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_RECIPES + "(" + KEY_ID +
-                " integer primary key, " + KEY_NAME + " text," + KEY_MAIL + " text)");
+        db.execSQL("CREATE TABLE " + TABLE_RECIPES + "(" +
+                KEY_ID + " INTEGER PRIMARY KEY, " +
+                KEY_IMAGE + " BLOB," +
+                KEY_TITLE + " TEXT," +
+                KEY_DURATION + " INTEGER," +
+                KEY_DESCRIPTION + " TEXT," +
+                KEY_INGREDIENTS_AMOUNT + " TEXT," +
+                KEY_MAIL + " TEXT" +
+            ")");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists " + TABLE_RECIPES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPES);
 
         onCreate(db);
     }
