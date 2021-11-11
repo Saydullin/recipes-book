@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -19,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.recipesbook.db.DbRecipe;
-import com.example.recipesbook.db.Recipe;
+import com.example.recipesbook.db.RecipeManager;
 import com.example.recipesbook.utils.Validator;
 
 public class AddRecipe extends AppCompatActivity {
@@ -72,16 +71,16 @@ public class AddRecipe extends AppCompatActivity {
         });
 
         submit_add_recipe.setOnClickListener(v -> {
-            Recipe recipeManager = new Recipe(this);
+            RecipeManager recipeManager = new RecipeManager(this);
             Validator validate = new Validator(this);
 
-            String validateImage = recipeImagePreview.getResources().toString();
-            String validateTitle = recipeTitle.getText().toString();
-            String validateDescription= recipeDescription.getText().toString();
-            int validateDuration = Integer.parseInt(recipeDuration.getText().toString());
-            int validateIngredientsAmount = Integer.parseInt(recipeIngredientsAmount.getText().toString());
-
             try {
+                String validateImage = recipeImagePreview.getResources().toString().trim();
+                String validateTitle = recipeTitle.getText().toString().trim();
+                String validateDescription= recipeDescription.getText().toString().trim();
+                int validateDuration = Integer.parseInt(recipeDuration.getText().toString());
+                int validateIngredientsAmount = Integer.parseInt(recipeIngredientsAmount.getText().toString());
+
                 // Validate received data from user
                 validate.checkString("image", validateImage, new int[] {5, -1});
                 validate.checkString("title", validateTitle, new int[] {3, 15});
@@ -91,41 +90,35 @@ public class AddRecipe extends AppCompatActivity {
 
                 // Add data to database
                 recipeManager.add(validateImage, validateTitle, validateIngredientsAmount, validateDuration, validateDescription);
+                Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
+            } catch(NumberFormatException e) {
+                Toast.makeText(this, "Fill all the fields!", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
+                e.printStackTrace();
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
 
-            String title = recipeTitle.getText().toString();
-            String description = recipeDescription.getText().toString();
-
-            SQLiteDatabase database1 = dbRecipe.getWritableDatabase();
-
-            ContentValues contentValues = new ContentValues();
-
-//            contentValues.put(DbRecipe.KEY_NAME, title);
-//            contentValues.put(DbRecipe.KEY_MAIL, description);
-
-            database1.insert(DbRecipe.TABLE_RECIPES, null, contentValues);
-
-            Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
-
-            Cursor cursor = database1.query(DbRecipe.TABLE_RECIPES, null, null, null, null, null, null);
-
-            if (cursor.moveToFirst()) {
-                int idIndex = cursor.getColumnIndex(DbRecipe.KEY_ID);
-                int nameIndex = cursor.getColumnIndex(DbRecipe.KEY_TITLE);
-                int emailIndex = cursor.getColumnIndex(DbRecipe.KEY_MAIL);
-
-                do {
-                    Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
-                            ", name = " + cursor.getString(nameIndex) +
-                            ", email = " + cursor.getString(emailIndex));
-                } while (cursor.moveToNext());
-            } else {
-                Log.d("mLog", "0 rows");
-            }
-
-            cursor.close();
+//            SQLiteDatabase database1 = dbRecipe.getWritableDatabase();
+//            // Чтение из базы в классе сделать
+//            Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
+//
+//            Cursor cursor = database1.query(DbRecipe.TABLE_RECIPES, null, null, null, null, null, null);
+//
+//            if (cursor.moveToFirst()) {
+//                int idIndex = cursor.getColumnIndex(DbRecipe.KEY_ID);
+//                int nameIndex = cursor.getColumnIndex(DbRecipe.KEY_TITLE);
+//                int emailIndex = cursor.getColumnIndex(DbRecipe.KEY_MAIL);
+//
+//                do {
+//                    Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
+//                            ", name = " + cursor.getString(nameIndex) +
+//                            ", email = " + cursor.getString(emailIndex));
+//                } while (cursor.moveToNext());
+//            } else {
+//                Log.d("mLog", "0 rows");
+//            }
+//
+//            cursor.close();
         });
     }
 
