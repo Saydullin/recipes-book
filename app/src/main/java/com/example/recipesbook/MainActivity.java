@@ -109,23 +109,23 @@ public class MainActivity extends AppCompatActivity {
             int descriptionIndex = cursor.getColumnIndex(DbRecipe.KEY_DESCRIPTION);
             int durationIndex = cursor.getColumnIndex(DbRecipe.KEY_DURATION);
             int ingredientsAmountIndex = cursor.getColumnIndex(DbRecipe.KEY_INGREDIENTS_AMOUNT);
+            int duration;
+            StringBuilder durationFormat = new StringBuilder();
 
             Toast.makeText(this, cursor.getString(imageIndex), Toast.LENGTH_LONG).show();
 
             do {
-//                recipeList.add(new Recipe(
-//                        5 + i,
-//                        44,
-//                        "Burger",
-//                        "1h 40min",
-//                        "https://c4.wallpaperflare.com/wallpaper/869/719/717/cuisine-food-india-indian-wallpaper-preview.jpg",
-//                        "Description"));
+                duration = cursor.getInt(durationIndex);
+                if (duration / 60 >= 1) {
+                    durationFormat.append(duration / 60).append("h ");
+                }
+                durationFormat.append(duration % 60).append("min");
 
                 recipeList.add(new Recipe(
                         cursor.getInt(idIndex),
                         cursor.getInt(ingredientsAmountIndex),
                         cursor.getString(titleIndex),
-                        cursor.getInt(durationIndex) + "",
+                        durationFormat.toString(),
                         cursor.getString(imageIndex),
                         cursor.getString(descriptionIndex)));
 
