@@ -7,11 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +23,7 @@ public class AddRecipe extends AppCompatActivity {
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
 
+    String imageURI;
     EditText recipeTitle;
     EditText recipeDuration;
     EditText recipeDescription;
@@ -75,7 +73,7 @@ public class AddRecipe extends AppCompatActivity {
             Validator validate = new Validator(this);
 
             try {
-                String validateImage = recipeImagePreview.getResources().toString().trim();
+                String validateImage = recipeImagePreview.getResources().toString();
                 String validateTitle = recipeTitle.getText().toString().trim();
                 String validateDescription= recipeDescription.getText().toString().trim();
                 int validateDuration = Integer.parseInt(recipeDuration.getText().toString());
@@ -89,7 +87,9 @@ public class AddRecipe extends AppCompatActivity {
                 validate.checkString("description", validateDescription, new int[] {50, 400});
 
                 // Add data to database
-                recipeManager.add(validateImage, validateTitle, validateIngredientsAmount, validateDuration, validateDescription);
+                Toast.makeText(AddRecipe.this, "BOT - " + imageURI, Toast.LENGTH_LONG).show();
+
+                recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription);
                 Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
             } catch(NumberFormatException e) {
                 Toast.makeText(this, "Fill all the fields!", Toast.LENGTH_LONG).show();
@@ -123,7 +123,7 @@ public class AddRecipe extends AppCompatActivity {
     }
 
     private void pickImageFromGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("image/*");
         startActivityForResult(intent, IMAGE_PICK_CODE);
     }
@@ -147,6 +147,9 @@ public class AddRecipe extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             assert data != null;
+            imageURI = data.getData().toString();
+            Toast.makeText(AddRecipe.this, data.getData().toString(), Toast.LENGTH_LONG).show();
+
             recipeImagePreview.setImageURI(data.getData());
         }
     }

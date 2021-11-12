@@ -65,7 +65,7 @@
             android:transitionName="ImageTransform"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardViewFullImage"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/ic_food_preview" />
 
     </androidx.cardview.widget.CardView>
 

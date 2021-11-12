@@ -10,7 +10,7 @@ import com.example.recipesbook.MainActivity;
 
 public class DbRecipe extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 9;
     public static final String DATABASE_NAME = "RecipesDB";
     public static final String TABLE_RECIPES = "recipes";
 
@@ -30,7 +30,7 @@ public class DbRecipe extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_RECIPES + "(" +
                 KEY_ID + " INTEGER PRIMARY KEY, " +
-                KEY_IMAGE + " BLOB," +
+                KEY_IMAGE + " TEXT," +
                 KEY_TITLE + " TEXT," +
                 KEY_DURATION + " INTEGER," +
                 KEY_DESCRIPTION + " TEXT," +

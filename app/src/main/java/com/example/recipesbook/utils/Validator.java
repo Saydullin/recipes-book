@@ -24,7 +24,10 @@ public class Validator {
 
     public void checkString(String name, String value, int[] minMax) throws Exception {
 
-        if (value.length() < minMax[0] || value.length() > minMax[1]) {
+        if (value.length() < minMax[0]) {
+            throw new Exception("The wrong length of " + name);
+        }
+        if (value.length() > minMax[1] && minMax[1] != -1) {
             throw new Exception("The wrong length of " + name);
         }
 

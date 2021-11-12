@@ -41,7 +41,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/image"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/button_pressed" />
+                    app:srcCompat="@drawable/ic_food_preview" />
 
             </androidx.cardview.widget.CardView>
 
