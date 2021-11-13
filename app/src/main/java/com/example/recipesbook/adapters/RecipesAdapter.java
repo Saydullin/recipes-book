@@ -45,10 +45,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
     @Override
     public void onBindViewHolder(@NonNull RecipesViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.recipeTitle.setText(recipes.get(position).getTitle());
-//        Glide.with(context)
-//                .load(recipes.get(position).getImg())
-//                .into(holder.recipeImage);
-        holder.recipeImage.setImageURI(Uri.parse(recipes.get(position).getImg()));
+        Glide.with(context)
+                .load(recipes.get(position).getImg())
+                .into(holder.recipeImage);
+//        holder.recipeImage.setImageURI(Uri.parse(recipes.get(position).getImg()));
         holder.recipeDuration.setText(recipes.get(position).getDuration());
         holder.recipesIngredientsAmount.setText(recipes.get(position).getIngredientsAmount() + " ingredients");
 

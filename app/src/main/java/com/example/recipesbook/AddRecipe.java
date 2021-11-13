@@ -87,9 +87,7 @@ public class AddRecipe extends AppCompatActivity {
                 validate.checkString("description", validateDescription, new int[] {50, 400});
 
                 // Add data to database
-                Toast.makeText(AddRecipe.this, "BOT - " + imageURI, Toast.LENGTH_LONG).show();
-
-                recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription);
+                recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription, "all");
                 Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
             } catch(NumberFormatException e) {
                 Toast.makeText(this, "Fill all the fields!", Toast.LENGTH_LONG).show();
@@ -148,8 +146,6 @@ public class AddRecipe extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             assert data != null;
             imageURI = data.getData().toString();
-            Toast.makeText(AddRecipe.this, data.getData().toString(), Toast.LENGTH_LONG).show();
-
             recipeImagePreview.setImageURI(data.getData());
         }
     }

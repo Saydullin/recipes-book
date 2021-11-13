@@ -23,7 +23,7 @@ public class RecipeManager {
         this.context = context;
     }
 
-    public void add(String imagePreview, String title, int ingredientsAmount, int duration, String description) {
+    public void add(String imagePreview, String title, int ingredientsAmount, int duration, String description, String tag) {
         dbRecipe = new DbRecipe(context);
 
         SQLiteDatabase database = dbRecipe.getWritableDatabase();
@@ -35,6 +35,7 @@ public class RecipeManager {
         contentValues.put(DbRecipe.KEY_DURATION, duration);
         contentValues.put(DbRecipe.KEY_DESCRIPTION, description);
         contentValues.put(DbRecipe.KEY_INGREDIENTS_AMOUNT, ingredientsAmount);
+        contentValues.put(DbRecipe.KEY_TAG, tag);
 
         database.insert(DbRecipe.TABLE_RECIPES, null, contentValues);
     }

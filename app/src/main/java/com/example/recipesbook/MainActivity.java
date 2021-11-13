@@ -112,8 +112,6 @@ public class MainActivity extends AppCompatActivity {
             int duration;
             StringBuilder durationFormat = new StringBuilder();
 
-            Toast.makeText(this, cursor.getString(imageIndex), Toast.LENGTH_LONG).show();
-
             do {
                 duration = cursor.getInt(durationIndex);
                 if (duration / 60 >= 1) {
@@ -129,41 +127,34 @@ public class MainActivity extends AppCompatActivity {
                         cursor.getString(imageIndex),
                         cursor.getString(descriptionIndex)));
 
+                durationFormat.delete(0, durationFormat.length());
             } while (cursor.moveToNext());
-            setRecipeRecycle(recipeList);
-        } else {
-            Toast.makeText(this, "В базе НЕТ данных!", Toast.LENGTH_SHORT).show();
-            recipeList.add(new Recipe(
-                1,
+        }
+
+        cursor.close();
+
+        recipeList.add(new Recipe(1,
                 12,
                 "Cherry Winks",
                 "15min",
                 "https://c4.wallpaperflare.com/wallpaper/869/719/717/cuisine-food-india-indian-wallpaper-preview.jpg",
                 "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
-        }
 
-        cursor.close();
+        recipeList.add(new Recipe(2,
+                7,
+                "Barbie Shot",
+                "40min",
+                "https://img.delo-vcusa.ru/2016/12/10-shikarnyh-goryachih-blyud-na-noviy-god.jpg",
+                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
 
-//        recipeList.add(new Recipe(1,
-//                12,
-//                "Cherry Winks",
-//                "15min",
-//                "https://c4.wallpaperflare.com/wallpaper/869/719/717/cuisine-food-india-indian-wallpaper-preview.jpg",
-//                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
-//
-//        recipeList.add(new Recipe(2,
-//                7,
-//                "Barbie Shot",
-//                "40min",
-//                "https://img.delo-vcusa.ru/2016/12/10-shikarnyh-goryachih-blyud-na-noviy-god.jpg",
-//                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
-//
-//        recipeList.add(new Recipe(3,
-//                5,
-//                "Antelope Goulash",
-//                "30min",
-//                "https://p4.wallpaperbetter.com/wallpaper/797/364/1014/food-plates-wooden-surface-still-life-wallpaper-preview.jpg",
-//                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
+        recipeList.add(new Recipe(3,
+                5,
+                "Antelope Goulash",
+                "30min",
+                "https://p4.wallpaperbetter.com/wallpaper/797/364/1014/food-plates-wooden-surface-still-life-wallpaper-preview.jpg",
+                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
+        setRecipeRecycle(recipeList);
+
 //
 //        recipeList.add(new Recipe(4,
 //                9,
