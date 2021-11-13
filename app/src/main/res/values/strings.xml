@@ -35,11 +35,16 @@
     <string name="ingredients_text">Ingredients</string>
     <string name="ingredients_text_ex">Rice</string>
     <string name="add_new_recipe">Add new recipe</string>
+    <string name="user_profile_title">Profile</string>
     <string name="title_text">Title</string>
+    <string name="user_name_text">Name</string>
+    <string name="user_name_text_ex">Josh</string>
+    <string name="user_email_text_ex">josh.cooker@gmail.com</string>
     <string name="title_text_ex">Rice Soup</string>
     <string name="description_text">Description</string>
     <string name="description_text_ex">First of all, take the rice and wash it until …</string>
     <string name="cancel_text" tools:ignore="ButtonCase">cancel</string>
+    <string name="forgot_pass_text" tools:ignore="ButtonCase">forgot password</string>
     <string name="steps_amount">Steps amount</string>
     <string name="ingredients_amount_text">Ingredients amount (2 – 50)</string>
     <string name="duration_text">Duration (min). Enter «90» for ‹1h 30min›</string>

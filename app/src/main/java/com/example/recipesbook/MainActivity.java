@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recipeRecycle3;
     RecipesAdapter recipesAdapter;
     private TextView textViewResult;
+    ImageButton filterSearchView;
     ImageButton button_login;
     ImageButton button_add_recipe;
 
@@ -53,10 +54,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRecipes();
 
+        filterSearchView = findViewById(R.id.filterSearchView);
         button_login = findViewById(R.id.button_login);
         button_add_recipe = findViewById(R.id.button_add_recipe);
 
         button_login.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, UserProfile.class);
+            startActivity(intent);
+        });
+
+        filterSearchView.setOnClickListener(v -> {
             setRecipes();
         });
 
@@ -66,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 
     private void setRecipeRecycle(List<Recipe> recipeList) {
 
