@@ -8,7 +8,6 @@ import android.widget.Button;
 public class UserProfile extends AppCompatActivity {
 
     Button button_cancel_activity;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
