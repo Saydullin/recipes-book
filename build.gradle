@@ -19,9 +19,7 @@ plugins {
 
 sonarqube {
   properties {
-    property "sonar.projectKey", "Saydullin_recipes-book"
-    property "sonar.organization", "saydullin"
-    property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.projectKey", "Recipes-book"
   }
 }
 
