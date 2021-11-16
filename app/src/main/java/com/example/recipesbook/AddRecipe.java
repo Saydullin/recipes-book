@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class AddRecipe extends AppCompatActivity {
     EditText recipeDuration;
     EditText recipeDescription;
     EditText recipeIngredientsAmount;
-    Button button_cancel_activity;
+    ImageButton button_cancel_activity;
     Button submit_add_recipe;
     ImageView recipeImagePreview;
 
@@ -90,7 +91,7 @@ public class AddRecipe extends AppCompatActivity {
                 recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription, "all");
                 Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
             } catch(NumberFormatException e) {
-                Toast.makeText(this, "Fill all the fields!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Fill all the fields!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();

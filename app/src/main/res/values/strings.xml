@@ -2,7 +2,7 @@
     <string name="app_name">Recipes</string>
     <string name="recipes_book">Recipes Book</string>
     <string name="font_normal">sans-serif</string>
-    <string name="submit_button">Done</string>
+    <string name="submit_button">Save changes</string>
     <string name="search_text">Search recipes</string>
     <string name="sign_up">Sign Up</string>
     <string name="get_back">Get Back</string>
@@ -25,6 +25,7 @@
     <string name="josh_example">Josh</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
+    <string name="user_recepts">My recepts</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
