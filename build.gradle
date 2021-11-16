@@ -22,7 +22,7 @@ sonarqube {
     property "sonar.projectKey", "Saydullin_recipes-book"
     property "sonar.organization", "saydullin"
     property "sonar.host.url", "https://sonarcloud.io"
-  }}
+}}
 
 task clean(type: Delete) {
     delete rootProject.buildDir
