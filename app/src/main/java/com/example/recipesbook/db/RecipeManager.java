@@ -37,6 +37,7 @@ public class RecipeManager {
         contentValues.put(DbRecipe.KEY_INGREDIENTS_AMOUNT, ingredientsAmount);
         contentValues.put(DbRecipe.KEY_TAG, tag);
 
+        Toast.makeText(context, "Data really saved successfuly", Toast.LENGTH_SHORT).show();
         database.insert(DbRecipe.TABLE_RECIPES, null, contentValues);
     }
 

@@ -49,10 +49,16 @@ public class MainActivity extends AppCompatActivity {
     DbRecipe dbRecipe;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        setRecipes();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setRecipes();
 
         filterSearchView = findViewById(R.id.filterSearchView);
         button_login = findViewById(R.id.button_login);
@@ -61,10 +67,6 @@ public class MainActivity extends AppCompatActivity {
         button_login.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, UserProfile.class);
             startActivity(intent);
-        });
-
-        filterSearchView.setOnClickListener(v -> {
-            setRecipes();
         });
 
         button_add_recipe.setOnClickListener(v -> {
@@ -97,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setRecipes() {
-
-//        new GetDatas().execute("https://jsonplaceholder.typicode.com/users/1");
 
         dbRecipe = new DbRecipe(this);
 
@@ -160,30 +160,6 @@ public class MainActivity extends AppCompatActivity {
                 "https://p4.wallpaperbetter.com/wallpaper/797/364/1014/food-plates-wooden-surface-still-life-wallpaper-preview.jpg",
                 "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
         setRecipeRecycle(recipeList);
-
-//
-//        recipeList.add(new Recipe(4,
-//                9,
-//                "Seminary Muffins",
-//                "1h 30min",
-//                "https://c1.wallpaperflare.com/preview/161/933/181/barbecue-cooking-delicious-dinner.jpg",
-//                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
-//
-//        recipeList.add(new Recipe(5,
-//                14,
-//                "Funeral Pie",
-//                "2h 30min",
-//                "https://images.unsplash.com/photo-1602192103300-47e66756152e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8anVuayUyMGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
-//                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
-//
-//        recipeList.add(new Recipe(6,
-//                17,
-//                "Mississippi Six",
-//                "1h",
-//                "https://images.unsplash.com/photo-1609167830220-7164aa360951?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8ZmFzdGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
-//                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."));
-
-//        setRecipeRecycle(recipeList);
     }
 
     private class GetDatas extends AsyncTask<String, String, String> {

@@ -10,7 +10,7 @@ import com.example.recipesbook.MainActivity;
 
 public class DbRecipe extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 9;
+    public static final int DATABASE_VERSION = 10;
     public static final String DATABASE_NAME = "RecipesDB";
     public static final String TABLE_RECIPES = "recipes";
 
@@ -20,7 +20,6 @@ public class DbRecipe extends SQLiteOpenHelper {
     public static final String KEY_DURATION = "duration";
     public static final String KEY_DESCRIPTION = "name";
     public static final String KEY_INGREDIENTS_AMOUNT = "ingredients_amount";
-    public static final String KEY_MAIL = "email";
     public static final String KEY_TAG = "tag";
 
 //  tags
