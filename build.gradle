@@ -25,11 +25,6 @@ sonarqube {
     }
 }
 
-       // ./gradlew sonarqube \
- // -Dsonar.projectKey=Recipes-book
-//  -Dsonar.host.url=http://localhost:9000
-//  -Dsonar.login=b5cc763c3fcb50a6d25b4f74746a653b2a987edd
-
 //sonarqube {
 //    properties {
 //        property "sonar.projectKey", "Recipes-book"
