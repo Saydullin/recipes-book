@@ -81,10 +81,10 @@ public class AddRecipe extends AppCompatActivity {
 
                 // Validate received data from user
                 validate.checkString("image", validateImage, new int[] {5, -1});
-                validate.checkString("title", validateTitle, new int[] {3, 15});
+                validate.checkString("title", validateTitle, new int[] {3, 35});
                 validate.checkInt("ingredients amount", validateIngredientsAmount, new int[] {2, 50});
                 validate.checkInt("duration", validateDuration, new int[] {5, 1440});
-                validate.checkString("description", validateDescription, new int[] {50, 400});
+                validate.checkString("description", validateDescription, new int[] {10, 400});
 
                 // Add data to database
                 recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription, "all");

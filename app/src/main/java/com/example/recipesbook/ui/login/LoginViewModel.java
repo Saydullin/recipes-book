@@ -68,3 +68,5 @@ public class LoginViewModel extends ViewModel {
         return password != null && password.trim().length() > 5;
     }
 }
+
+

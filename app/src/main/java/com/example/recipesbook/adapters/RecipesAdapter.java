@@ -18,9 +18,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.recipesbook.MainActivity;
 import com.example.recipesbook.R;
 import com.example.recipesbook.RecipeItem;
 import com.example.recipesbook.models.Recipe;
+import com.example.recipesbook.ui.login.LoginActivity;
 
 import java.util.List;
 
@@ -55,10 +57,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RecipeItem.class);
 
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
-                    (Activity) context,
-                    new Pair<View, String>(holder.recipeImageCard, "ImageTransform")
-            );
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
+//                    (Activity) context,
+//                    new Pair<View, String>(holder.recipeImageCard, "ImageTransform")
+//            );
 
             intent.putExtra("recipeImage", recipes.get(position).getImg());
             intent.putExtra("recipeTitle", recipes.get(position).getTitle());
@@ -66,7 +68,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
             intent.putExtra("recipeIngredients", recipes.get(position).getIngredientsAmount());
             intent.putExtra("recipeDescription", recipes.get(position).getDescription());
 
-            context.startActivity(intent, options.toBundle());
+//            context.startActivity(intent, options.toBundle());
+            context.startActivity(intent);
         });
     }
 

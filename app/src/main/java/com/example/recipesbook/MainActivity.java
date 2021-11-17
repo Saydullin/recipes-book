@@ -49,10 +49,15 @@ public class MainActivity extends AppCompatActivity {
     DbRecipe dbRecipe;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        setRecipes();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setRecipes();
 
         filterSearchView = findViewById(R.id.filterSearchView);
         button_login = findViewById(R.id.button_login);
@@ -61,10 +66,6 @@ public class MainActivity extends AppCompatActivity {
         button_login.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, UserProfile.class);
             startActivity(intent);
-        });
-
-        filterSearchView.setOnClickListener(v -> {
-            setRecipes();
         });
 
         button_add_recipe.setOnClickListener(v -> {
