@@ -1,6 +1,7 @@
 package com.example.recipesbook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,14 +11,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.recipesbook.adapters.RecipesAdapter;
 import com.example.recipesbook.db.DbRecipe;
 import com.example.recipesbook.models.Recipe;
@@ -45,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recipeRecycle2;
     RecyclerView recipeRecycle3;
     RecipesAdapter recipesAdapter;
+    Drawable profileImage;
     private TextView textViewResult;
     ImageButton filterSearchView;
-    ImageButton button_login;
+    ImageView button_login;
     ImageButton button_add_recipe;
 
     GoogleSignInClient mGoogleSignInClient;
@@ -57,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            Uri personImage = acct.getPhotoUrl();
+            Glide.with(this).load(String.valueOf(personImage)).into(button_login);
+        } else {
+            profileImage = ContextCompat.getDrawable(this, R.drawable.profile);
+            button_login.setImageDrawable(profileImage);
+        }
+
         setRecipes();
     }
 
@@ -80,20 +95,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.server_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            Toast.makeText(this, "Hello " + personName, Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "Here email " + personEmail, Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     private void setRecipeRecycle(List<Recipe> recipeList) {

@@ -4,7 +4,7 @@
     <string name="font_normal">sans-serif</string>
     <string name="submit_button">Done</string>
     <string name="search_text">Search recipes</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="sign_in_by_google">Sign In by Google</string>
     <string name="get_back">Get Back</string>
     <string name="welcome_to_recipes_book">Welcome to Recipes Book</string>
     <string name="salads_text">Salads</string>
@@ -27,7 +27,7 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">•••••••</string>
     <string name="action_sign_in">Sign in or register</string>
-    <string name="google_sign_in">Via Google</string>
+    <string name="google_sign_in">Log in by Google</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome "</string>
     <string name="invalid_username">Not a valid username</string>
@@ -46,7 +46,6 @@
     <string name="description_text">Description</string>
     <string name="description_text_ex">First of all, take the rice and wash it until …</string>
     <string name="cancel_text" tools:ignore="ButtonCase">Cancel</string>
-    <string name="reset_pass_text" tools:ignore="ButtonCase">Reset password</string>
     <string name="steps_amount">Steps amount</string>
     <string name="ingredients_amount_text">Ingredients amount (2 – 50)</string>
     <string name="duration_text">Duration (min). Enter «90» for ‹1h 30min›</string>
@@ -66,9 +65,11 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="sign_out">sign_out</string>
+    <string name="sign_out">Sign out</string>
 
     <string name="server_client_id">192537204330-vedegos5oei85gmautfjk1sugboa7fkt.apps.googleusercontent.com</string>
+    <string name="change_account">Change Account</string>
+    <string name="no_signed_in">You do not have signed in yet. Please sign in to see your recipes</string>
 </resources>
 
 

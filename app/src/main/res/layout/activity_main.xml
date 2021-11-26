@@ -76,21 +76,39 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_plus"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button_login"
+                app:layout_constraintEnd_toStartOf="@+id/login_imageview"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/button_login"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/login_imageview"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                app:cardCornerRadius="50dp"
                 android:layout_marginHorizontal="15dp"
-                android:background="@color/theme_bg_light"
-                android:contentDescription="@string/image"
-                android:scaleType="centerInside"
-                android:src="@drawable/profile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" >
+                <ImageView
+                    android:id="@+id/button_login"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerInside"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/profile" />
+            </androidx.cardview.widget.CardView>
+
+<!--            <ImageButton-->
+<!--                android:id="@+id/login_imageview"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_marginHorizontal="15dp"-->
+<!--                android:background="@color/theme_bg_light"-->
+<!--                android:contentDescription="@string/image"-->
+<!--                android:scaleType="centerInside"-->
+<!--                android:src="@drawable/profile"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,11 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,25 +30,74 @@ import com.google.android.gms.tasks.Task;
 public class UserProfile extends AppCompatActivity {
 
     GoogleSignInClient mGoogleSignInClient;
+    ImageView recipeImagePreview;
+    TextView userName;
+    TextView userEmail;
+    Button change_accounts;
+    LinearLayout no_signed_in;
+    LinearLayout signed_in;
     Button sign_in;
+    Button sign_out;
     int RC_SIGN_IN = 0;
     Button button_cancel_activity;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.server_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personEmail = acct.getEmail();
+            Uri personImage = acct.getPhotoUrl();
+            userName.setText(personName);
+            userEmail.setText(personEmail);
+            Glide.with(this).load(String.valueOf(personImage)).into(recipeImagePreview);
+        } else {
+            no_signed_in.setVisibility(View.VISIBLE);
+            signed_in.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+        no_signed_in = findViewById(R.id.no_signed_in);
+        signed_in = findViewById(R.id.signed_in);
+
+        change_accounts = findViewById(R.id.change_accounts_button);
+        sign_out = findViewById(R.id.sign_out_button);
         sign_in = findViewById(R.id.sign_in_button);
 
         button_cancel_activity = findViewById(R.id.button_cancel_activity);
         button_cancel_activity.setOnClickListener(v -> finish());
 
+        recipeImagePreview = findViewById(R.id.recipeImagePreview);
+        userName = findViewById(R.id.user_name);
+        userEmail = findViewById(R.id.user_email);
+
+        change_accounts.setOnClickListener(v -> {
+            if (v.getId() == R.id.change_accounts_button) {
+                switchAccounts();
+            }
+        });
+
         sign_in.setOnClickListener(v -> {
-            switch (v.getId()) {
-                case R.id.sign_in_button:
-                    signIn();
-                    break;
+            if (v.getId() == R.id.sign_in_button) {
+                signIn();
+            }
+        });
+
+        sign_out.setOnClickListener(v -> {
+            if (v.getId() == R.id.sign_out_button) {
+                signOut();
             }
         });
 
@@ -57,6 +112,17 @@ public class UserProfile extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void switchAccounts() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                        startActivityForResult(signInIntent, RC_SIGN_IN);
+                    }
+                });
     }
 
     private void signOut() {
@@ -92,11 +158,9 @@ public class UserProfile extends AppCompatActivity {
             startActivity(intent);
             Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show();
         } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("Error", "signInResult:failed code=" + e.getStatusCode());
-            Toast.makeText(this, "Authenticate Error", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "log: " + e.getStatusCode(), Toast.LENGTH_LONG).show();
+            if (e.getStatusCode() != 12501) {
+                Toast.makeText(this, "log: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
