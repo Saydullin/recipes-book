@@ -104,11 +104,11 @@
 
         <Button
             android:id="@+id/recipe_item_button"
-            style="?android:attr/buttonBarButtonStyle"
+            android:paddingHorizontal="20dp"
+            android:backgroundTint="@color/button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:paddingHorizontal="30dp"
             android:paddingVertical="15dp"
             android:text="@string/cancel_text"
             android:textSize="14sp"

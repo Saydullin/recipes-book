@@ -11,8 +11,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.recipesbook.models.Recipe;
+
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeManager {
 
@@ -40,15 +43,20 @@ public class RecipeManager {
         database.insert(DbRecipe.TABLE_RECIPES, null, contentValues);
     }
 
-    public ArrayList<String> get() {
+    public List<Recipe> get(String tag) {
 
-        ArrayList<String> result = new ArrayList<String>();
-        ArrayList<String> resultItem = new ArrayList<String>();
+        dbRecipe = new DbRecipe(context);
+        Cursor cursor;
 
-        SQLiteDatabase database1 = dbRecipe.getWritableDatabase();
-        // Чтение из базы в классе сделать
+        List<Recipe> recipeList = new ArrayList<>();
 
-        Cursor cursor = database1.query(DbRecipe.TABLE_RECIPES, null, null, null, null, null, null);
+        SQLiteDatabase database = dbRecipe.getWritableDatabase();
+
+        if (tag.equals("all")) {
+            cursor = database.query(DbRecipe.TABLE_RECIPES, null, null, null, null, null, null);
+        } else {
+            cursor = database.rawQuery("SELECT * FROM " + DbRecipe.TABLE_RECIPES + " WHERE " + dbRecipe.KEY_TAG + "='" + tag + "'", null);
+        }
 
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex(DbRecipe.KEY_ID);
@@ -57,19 +65,30 @@ public class RecipeManager {
             int descriptionIndex = cursor.getColumnIndex(DbRecipe.KEY_DESCRIPTION);
             int durationIndex = cursor.getColumnIndex(DbRecipe.KEY_DURATION);
             int ingredientsAmountIndex = cursor.getColumnIndex(DbRecipe.KEY_INGREDIENTS_AMOUNT);
+            int duration;
+            StringBuilder durationFormat = new StringBuilder();
 
             do {
-                Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
-                        ", title = " + cursor.getString(titleIndex) +
-                        ", description = " + cursor.getString(descriptionIndex));
+                duration = cursor.getInt(durationIndex);
+                if (duration / 60 >= 1) {
+                    durationFormat.append(duration / 60).append("h ");
+                }
+                durationFormat.append(duration % 60).append("minR");
+
+                recipeList.add(new Recipe(
+                        cursor.getInt(idIndex),
+                        cursor.getInt(ingredientsAmountIndex),
+                        cursor.getString(titleIndex),
+                        durationFormat.toString(),
+                        cursor.getString(imageIndex),
+                        cursor.getString(descriptionIndex)));
+
+                durationFormat.delete(0, durationFormat.length());
             } while (cursor.moveToNext());
-        } else {
-            Log.d("mLog", "0 rows");
         }
 
         cursor.close();
 
-        return result;
+        return recipeList;
     }
-
 }

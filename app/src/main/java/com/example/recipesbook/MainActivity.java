@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.recipesbook.adapters.RecipesAdapter;
 import com.example.recipesbook.db.DbRecipe;
+import com.example.recipesbook.db.RecipeManager;
 import com.example.recipesbook.models.Recipe;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     Drawable profileImage;
     private TextView textViewResult;
     ImageButton filterSearchView;
+    ImageButton cookLaterTab;
     ImageView button_login;
     ImageButton button_add_recipe;
 
@@ -83,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
         filterSearchView = findViewById(R.id.filterSearchView);
         button_login = findViewById(R.id.button_login);
         button_add_recipe = findViewById(R.id.button_add_recipe);
+
+        cookLaterTab = findViewById(R.id.cookLaterTab);
+
+        cookLaterTab.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, BasketActivity.class);
+            startActivity(intent);
+        });
 
         button_login.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, UserProfile.class);
@@ -131,40 +140,10 @@ public class MainActivity extends AppCompatActivity {
 
         List<Recipe> recipeList = new ArrayList<>();
 
-        SQLiteDatabase database = dbRecipe.getWritableDatabase();
+        RecipeManager recipeManager = new RecipeManager(this);
 
-        Cursor cursor = database.query(DbRecipe.TABLE_RECIPES, null, null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex(DbRecipe.KEY_ID);
-            int imageIndex = cursor.getColumnIndex(DbRecipe.KEY_IMAGE);
-            int titleIndex = cursor.getColumnIndex(DbRecipe.KEY_TITLE);
-            int descriptionIndex = cursor.getColumnIndex(DbRecipe.KEY_DESCRIPTION);
-            int durationIndex = cursor.getColumnIndex(DbRecipe.KEY_DURATION);
-            int ingredientsAmountIndex = cursor.getColumnIndex(DbRecipe.KEY_INGREDIENTS_AMOUNT);
-            int duration;
-            StringBuilder durationFormat = new StringBuilder();
-
-            do {
-                duration = cursor.getInt(durationIndex);
-                if (duration / 60 >= 1) {
-                    durationFormat.append(duration / 60).append("h ");
-                }
-                durationFormat.append(duration % 60).append("min");
-
-                recipeList.add(new Recipe(
-                        cursor.getInt(idIndex),
-                        cursor.getInt(ingredientsAmountIndex),
-                        cursor.getString(titleIndex),
-                        durationFormat.toString(),
-                        cursor.getString(imageIndex),
-                        cursor.getString(descriptionIndex)));
-
-                durationFormat.delete(0, durationFormat.length());
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
+//      Получение всех рецептов с названием тега в аргументах метода get().
+        recipeList = recipeManager.get("all");
 
         recipeList.add(new Recipe(1,
                 12,

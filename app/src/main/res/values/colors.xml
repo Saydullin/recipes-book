@@ -17,6 +17,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
     <color name="colorPrimaryDark">#E7A870</color>
+
+    <color name="button_cancel">#00B08F</color>
 </resources>
 
 

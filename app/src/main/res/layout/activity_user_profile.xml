@@ -97,22 +97,35 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/change_accounts_button"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="15dp"
-                android:text="@string/change_account" />
+                android:gravity="center">
 
-            <Button
-                android:id="@+id/sign_out_button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:text="@string/sign_out"
-                android:textColor="@color/design_default_color_error"
-                android:textSize="13sp"/>
+                <Button
+                    android:id="@+id/sign_out_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/sign_out"
+                    android:backgroundTint="@color/design_default_color_error"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/change_accounts_button"
+                    android:paddingHorizontal="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:text="@string/change_account"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
@@ -155,23 +168,15 @@
 
             <Button
                 android:id="@+id/button_cancel_activity"
-                style="?android:attr/buttonBarButtonStyle"
+                android:paddingHorizontal="20dp"
+                android:backgroundTint="@color/button_cancel"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/cancel_text"
                 android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/submit_add_recipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:fontFamily="@font/montserrat"
-                android:text="@string/submit_button"
-                android:textSize="14sp" />
-
 
         </LinearLayout>
 

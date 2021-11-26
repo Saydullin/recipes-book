@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="@string/title_text"
                 android:fontFamily="@font/montserrat"
@@ -107,7 +107,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="@string/ingredients_amount_text"
                 android:fontFamily="@font/montserrat"
@@ -131,7 +131,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="@string/duration_text"
                 android:fontFamily="@font/montserrat"
@@ -155,7 +155,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="@string/description_text"
                 android:fontFamily="@font/montserrat"
@@ -191,7 +191,8 @@
 
             <Button
                 android:id="@+id/button_cancel_activity"
-                style="?android:attr/buttonBarButtonStyle"
+                android:paddingHorizontal="20dp"
+                android:backgroundTint="@color/button_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
