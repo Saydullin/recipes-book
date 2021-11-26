@@ -11,6 +11,7 @@ Application features:
   <li>Quick authorization using a google account</li>
   <li>Convenient search for all recipes</li>
   <li>Smart filter of recipes by duration, ingredients and category.</li>
+  <li>Cook Later Tab</li>
   <li>Adding and deleting your own recipes in the general database of all users</li>
   <li>A clear step-by-step description of food preparation</li>
 </ul>
