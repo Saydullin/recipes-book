@@ -51,33 +51,20 @@
                 android:background="@null"
                 android:fontFamily="@font/montserrat"
                 android:hint="@string/search_text"
-                android:textColorHint="@color/theme_quite_text"
                 android:inputType="text"
-                android:paddingEnd="15dp"
                 android:paddingVertical="15dp"
+                android:paddingEnd="15dp"
                 android:singleLine="true"
                 android:textColor="@color/theme_main_text"
+                android:textColorHint="@color/theme_quite_text"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button_login"
+                app:layout_constraintEnd_toStartOf="@+id/button_add_recipe"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/filterSearchView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
                 tools:ignore="RtlSymmetry" />
-
-            <ImageButton
-                android:id="@+id/button_login"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="15dp"
-                android:background="@color/theme_bg_light"
-                android:contentDescription="@string/image"
-                android:scaleType="centerInside"
-                android:src="@drawable/profile"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button_add_recipe"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/button_add_recipe"
@@ -88,6 +75,19 @@
                 android:contentDescription="@string/image"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_plus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_login"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_login"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="@color/theme_bg_light"
+                android:contentDescription="@string/image"
+                android:scaleType="centerInside"
+                android:src="@drawable/profile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

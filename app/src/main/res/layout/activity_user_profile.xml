@@ -110,14 +110,25 @@
 
         <Button
             android:id="@+id/button_forgot_pass"
+            style="?android:attr/buttonBarButtonStyle"
+            android:textColor="@color/design_default_color_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
             android:fontFamily="@font/montserrat"
-            android:text="@string/forgot_pass_text"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="13sp"
+            android:text="@string/reset_pass_text"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputsList" />
+
+        <Button
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="15dp"
+            android:text="@string/google_sign_in"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputsList" />
 
         <LinearLayout
@@ -136,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/cancel_text" />
+                android:text="@string/cancel_text"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/submit_add_recipe"
@@ -144,7 +156,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/submit_button" />
+                android:text="@string/submit_button"
+                android:textSize="14sp" />
+
 
         </LinearLayout>
 

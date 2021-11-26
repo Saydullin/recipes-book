@@ -19,6 +19,12 @@
         <!-- enable window content transitions -->
         <item name="android:windowActivityTransitions">true</item>
     </style>
+    <style name="Theme.RecipesBook.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.RecipesBook.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.RecipesBook.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
 
 

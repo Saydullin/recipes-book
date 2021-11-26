@@ -21,6 +21,10 @@ import android.widget.Toast;
 import com.example.recipesbook.adapters.RecipesAdapter;
 import com.example.recipesbook.db.DbRecipe;
 import com.example.recipesbook.models.Recipe;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton filterSearchView;
     ImageButton button_login;
     ImageButton button_add_recipe;
+
+    GoogleSignInClient mGoogleSignInClient;
 
     DbRecipe dbRecipe;
 
@@ -72,6 +78,21 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AddRecipe.class);
             startActivity(intent);
         });
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            Toast.makeText(this, "Hello " + personName, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Here email " + personEmail, Toast.LENGTH_SHORT).show();
+        }
 
     }
 
