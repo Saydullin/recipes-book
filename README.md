@@ -1,5 +1,5 @@
 # recipes-book
-<h2>Recipes - an android application.</h2>
+<h2>Recipes - an android opensource application.</h2>
 
 This is an app where everyone can find a recipe by a variety of criteria.
 
