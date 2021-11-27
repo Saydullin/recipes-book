@@ -46,11 +46,20 @@ public class Recipe {
         this.title = title;
     }
 
-    public int getDuration() {
-        return duration;
+    public String getDuration() {
+        StringBuilder durationFormat = new StringBuilder();
+
+        if (duration / 60 >= 1) {
+            durationFormat.append(duration / 60).append("h ");
+        }
+        if (duration % 60 >= 1) {
+            durationFormat.append(duration % 60).append("min");
+        }
+
+        return durationFormat.toString();
     }
 
-    public void setDuration() {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

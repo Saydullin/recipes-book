@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         textViewResult = findViewById(R.id.textViewResult);
 
-        filterSearchView = findViewById(R.id.filterSearchView);
+//        filterSearchView = findViewById(R.id.filterSearchView);
         button_login = findViewById(R.id.button_login);
         button_add_recipe = findViewById(R.id.button_add_recipe);
 

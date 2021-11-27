@@ -1,12 +1,8 @@
 package com.example.recipesbook.adapters;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +14,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.recipesbook.MainActivity;
 import com.example.recipesbook.R;
 import com.example.recipesbook.RecipeItem;
 import com.example.recipesbook.models.Recipe;
-import com.example.recipesbook.ui.login.LoginActivity;
 
+import java.io.CharArrayWriter;
 import java.util.List;
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder> {
@@ -64,7 +59,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
 
             intent.putExtra("recipeImage", recipes.get(position).getImg());
             intent.putExtra("recipeTitle", recipes.get(position).getTitle());
-            intent.putExtra("recipeDuration", recipes.get(position).getDuration() + "");
+            intent.putExtra("recipeDuration", recipes.get(position).getDuration());
             intent.putExtra("recipeIngredients", recipes.get(position).getIngredientsAmount());
             intent.putExtra("recipeDescription", recipes.get(position).getDescription());
 

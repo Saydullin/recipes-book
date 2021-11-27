@@ -154,8 +154,9 @@ public class UserProfile extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, MainActivity.class);
+//            startActivity(intent);
+            finish();
             Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show();
         } catch (ApiException e) {
             if (e.getStatusCode() != 12501) {
