@@ -2,10 +2,10 @@ package com.example.recipesbook.models;
 
 public class Recipe {
 
-    int id, ingredientsAmount;
-    String title, img, duration, description;
+    int id, ingredientsAmount, duration;
+    String title, img, description;
 
-    public Recipe(int id, int ingredientsAmount, String title,  String duration, String img, String description) {
+    public Recipe(int id, int ingredientsAmount, int duration, String title, String img, String description) {
         this.id = id;
         this.img = img;
         this.title = title;
@@ -46,11 +46,11 @@ public class Recipe {
         this.title = title;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String date) {
+    public void setDuration() {
         this.duration = duration;
     }
 
@@ -61,4 +61,5 @@ public class Recipe {
     public void setIngredientsAmount(int ingredientsAmount) {
         this.ingredientsAmount = ingredientsAmount;
     }
+
 }

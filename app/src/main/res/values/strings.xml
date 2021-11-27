@@ -9,7 +9,7 @@
     <string name="welcome_to_recipes_book">Welcome to Recipes Book</string>
     <string name="salads_text">Salads</string>
     <string name="soups_text">Soups</string>
-    <string name="desert_text">Deserts</string>
+    <string name="dessert_text">Desserts</string>
     <string name="image">Image</string>
     <string name="form_submit">Done</string>
 

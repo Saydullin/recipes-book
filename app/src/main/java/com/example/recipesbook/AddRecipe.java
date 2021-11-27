@@ -86,7 +86,7 @@ public class AddRecipe extends AppCompatActivity {
                 validate.checkInt("duration", validateDuration, new int[] {5, 1440});
                 validate.checkString("description", validateDescription, new int[] {10, 400});
 
-                // Add data to database
+                // Add data to databases
                 recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription, "salads");
                 Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
             } catch(NumberFormatException e) {

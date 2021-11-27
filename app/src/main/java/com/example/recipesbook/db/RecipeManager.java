@@ -70,16 +70,16 @@ public class RecipeManager {
 
             do {
                 duration = cursor.getInt(durationIndex);
-                if (duration / 60 >= 1) {
-                    durationFormat.append(duration / 60).append("h ");
-                }
-                durationFormat.append(duration % 60).append("minR");
+//                if (duration / 60 >= 1) {
+//                    durationFormat.append(duration / 60).append("h ");
+//                }
+//                durationFormat.append(duration % 60).append("minR");
 
                 recipeList.add(new Recipe(
                         cursor.getInt(idIndex),
                         cursor.getInt(ingredientsAmountIndex),
+                        duration,
                         cursor.getString(titleIndex),
-                        durationFormat.toString(),
                         cursor.getString(imageIndex),
                         cursor.getString(descriptionIndex)));
 

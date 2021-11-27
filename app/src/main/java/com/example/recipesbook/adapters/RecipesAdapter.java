@@ -51,7 +51,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
                 .load(recipes.get(position).getImg())
                 .into(holder.recipeImage);
 //        holder.recipeImage.setImageURI(Uri.parse(recipes.get(position).getImg()));
-        holder.recipeDuration.setText(recipes.get(position).getDuration());
+        holder.recipeDuration.setText(String.valueOf(recipes.get(position).getDuration()));
         holder.recipesIngredientsAmount.setText(recipes.get(position).getIngredientsAmount() + " ingredients");
 
         holder.itemView.setOnClickListener(v -> {
@@ -64,7 +64,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
 
             intent.putExtra("recipeImage", recipes.get(position).getImg());
             intent.putExtra("recipeTitle", recipes.get(position).getTitle());
-            intent.putExtra("recipeDuration", recipes.get(position).getDuration());
+            intent.putExtra("recipeDuration", recipes.get(position).getDuration() + "");
             intent.putExtra("recipeIngredients", recipes.get(position).getIngredientsAmount());
             intent.putExtra("recipeDescription", recipes.get(position).getDescription());
 
