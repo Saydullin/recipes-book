@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,11 +38,12 @@ import java.util.Map;
 
 public class UserProfile extends AppCompatActivity {
 
+    final static private String USER_DATA_PREFS = "userData";
+
     GoogleSignInClient mGoogleSignInClient;
     ImageView recipeImagePreview;
     TextView userName;
     TextView userEmail;
-    TextView errorText;
     Button change_accounts;
     LinearLayout no_signed_in;
     LinearLayout signed_in;
@@ -77,8 +79,6 @@ public class UserProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
-        errorText = findViewById(R.id.errorText);
 
         no_signed_in = findViewById(R.id.no_signed_in);
         signed_in = findViewById(R.id.signed_in);
@@ -117,6 +117,7 @@ public class UserProfile extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
     }
 
     private void signIn() {
@@ -140,6 +141,13 @@ public class UserProfile extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        SharedPreferences.Editor editor = getSharedPreferences(USER_DATA_PREFS, MODE_PRIVATE).edit();
+
+                        editor.remove("name");
+                        editor.remove("email");
+                        editor.remove("image");
+                        editor.remove("id");
+                        editor.apply();
                         Toast.makeText(UserProfile.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -167,6 +175,16 @@ public class UserProfile extends AppCompatActivity {
 //            Intent intent = new Intent(this, MainActivity.class);
 //            startActivity(intent);
             finish();
+
+            SharedPreferences.Editor editor = getSharedPreferences(USER_DATA_PREFS, MODE_PRIVATE).edit();
+
+            String userPhoto = account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : "";
+
+            editor.putString("name", account.getDisplayName());
+            editor.putString("email", account.getEmail());
+            editor.putString("image", userPhoto);
+            editor.putString("id", account.getId());
+            editor.apply();
             Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show();
         } catch (ApiException e) {
             if (e.getStatusCode() != 12501) {

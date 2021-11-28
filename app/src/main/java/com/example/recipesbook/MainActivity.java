@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,8 +24,6 @@ import com.example.recipesbook.db.RecipeManager;
 import com.example.recipesbook.models.Recipe;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +41,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView button_login;
     ImageButton button_add_recipe;
 
-    GoogleSignInClient mGoogleSignInClient;
-
     DbRecipe dbRecipe;
+    CurrentUser currentUser;
 
     @Override
     protected void onStart() {
@@ -58,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
             profileImage = ContextCompat.getDrawable(this, R.drawable.profile);
             button_login.setImageDrawable(profileImage);
         }
+
+        SharedPreferences prefs = getSharedPreferences("userData", MODE_PRIVATE);
+        String name = prefs.getString("name", "No name");
+
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
 
         setRecipes();
     }
@@ -90,12 +93,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AddRecipe.class);
             startActivity(intent);
         });
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.server_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
 
