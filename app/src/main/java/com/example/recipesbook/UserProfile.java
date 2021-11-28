@@ -15,13 +15,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.recipesbook.db.FirebaseManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * UserProfile, where user can see his information
@@ -33,6 +41,7 @@ public class UserProfile extends AppCompatActivity {
     ImageView recipeImagePreview;
     TextView userName;
     TextView userEmail;
+    TextView errorText;
     Button change_accounts;
     LinearLayout no_signed_in;
     LinearLayout signed_in;
@@ -68,6 +77,8 @@ public class UserProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        errorText = findViewById(R.id.errorText);
 
         no_signed_in = findViewById(R.id.no_signed_in);
         signed_in = findViewById(R.id.signed_in);
@@ -106,7 +117,6 @@ public class UserProfile extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
     }
 
     private void signIn() {

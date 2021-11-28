@@ -7,16 +7,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.recipesbook.db.DbRecipe;
+import com.example.recipesbook.db.FirebaseManager;
+import com.example.recipesbook.db.PictureManager;
 import com.example.recipesbook.db.RecipeManager;
 import com.example.recipesbook.utils.Validator;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class AddRecipe extends AppCompatActivity {
 
@@ -28,6 +42,9 @@ public class AddRecipe extends AppCompatActivity {
     EditText recipeDuration;
     EditText recipeDescription;
     EditText recipeIngredientsAmount;
+    Uri imageUri;
+    FirebaseStorage storage;
+    StorageReference storageReference;
     Button button_cancel_activity;
     Button submit_add_recipe;
     ImageView recipeImagePreview;
@@ -40,6 +57,9 @@ public class AddRecipe extends AppCompatActivity {
         setContentView(R.layout.activity_add_recipe);
 
         dbRecipe = new DbRecipe(this);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         recipeTitle = findViewById(R.id.recipeTitle);
         recipeDuration = findViewById(R.id.recipeDuration);
@@ -86,37 +106,36 @@ public class AddRecipe extends AppCompatActivity {
                 validate.checkInt("duration", validateDuration, new int[] {5, 1440});
                 validate.checkString("description", validateDescription, new int[] {10, 400});
 
-                // Add data to databases
-                recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription, "salads");
-                Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
+                PictureManager pictureManager = new PictureManager(this);
+                String imageName = pictureManager.addPicture(imageUri, null);
+
+                if (!imageName.equals("")) {
+                    // Add data to databases
+                    Map<String, Object> recipe = new HashMap<>();
+                    recipe.put("userEmail", "saydullinweb@gmail.com");
+                    recipe.put("title", validateTitle);
+                    recipe.put("image", imageName);
+                    recipe.put("duration", validateDuration);
+                    recipe.put("ingAmount", validateIngredientsAmount);
+                    recipe.put("description", validateDescription);
+
+                    FirebaseManager firebaseManager = new FirebaseManager(this);
+
+                    Map<String, Object> res = firebaseManager.add(recipe, "recipes");
+
+                    if (res.get("ok") == "true") {
+                        Toast.makeText(AddRecipe.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(AddRecipe.this, "Adding Failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+//                recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription, "salads");
             } catch(NumberFormatException e) {
                 Toast.makeText(this, "Fill all the fields!", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
-
-//            SQLiteDatabase database1 = dbRecipe.getWritableDatabase();
-//            // Чтение из базы в классе сделать
-//            Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
-//
-//            Cursor cursor = database1.query(DbRecipe.TABLE_RECIPES, null, null, null, null, null, null);
-//
-//            if (cursor.moveToFirst()) {
-//                int idIndex = cursor.getColumnIndex(DbRecipe.KEY_ID);
-//                int nameIndex = cursor.getColumnIndex(DbRecipe.KEY_TITLE);
-//                int emailIndex = cursor.getColumnIndex(DbRecipe.KEY_MAIL);
-//
-//                do {
-//                    Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
-//                            ", name = " + cursor.getString(nameIndex) +
-//                            ", email = " + cursor.getString(emailIndex));
-//                } while (cursor.moveToNext());
-//            } else {
-//                Log.d("mLog", "0 rows");
-//            }
-//
-//            cursor.close();
         });
     }
 
@@ -145,7 +164,9 @@ public class AddRecipe extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             assert data != null;
+            Toast.makeText(AddRecipe.this, data.getData().toString(), Toast.LENGTH_LONG).show();
             imageURI = data.getData().toString();
+            imageUri = data.getData();
             recipeImagePreview.setImageURI(data.getData());
         }
     }
