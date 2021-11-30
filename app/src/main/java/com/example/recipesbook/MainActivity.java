@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
                         assert value != null;
                         updateAllRecipes();
-                        Toast.makeText(MainActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                         for (DocumentChange dc : value.getDocumentChanges()) {
                             if (dc.getType() == DocumentChange.Type.ADDED) {
 //                                Toast.makeText(MainActivity.this, "Updated", Toast.LENGTH_SHORT).show();

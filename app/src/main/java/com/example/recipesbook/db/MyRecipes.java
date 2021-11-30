@@ -10,7 +10,7 @@ public class MyRecipes extends SQLiteOpenHelper {
 
     Context context;
 
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "MyRecipesDB";
     public static final String TABLE_ADDED_RECIPES = "recipes";
     public static final String TABLE_COOK_LATER_RECIPES = "cook_later";
@@ -23,6 +23,7 @@ public class MyRecipes extends SQLiteOpenHelper {
     public static final String KEY_INGREDIENTS = "ingredients";
     public static final String KEY_DATE = "date";
     public static final String KEY_TAG = "tag";
+    public static final String KEY_DOC_KEY = "doc";
 
     //  tags
     public static final String TAG_GENERAL = "all";
@@ -46,7 +47,8 @@ public class MyRecipes extends SQLiteOpenHelper {
                 KEY_DESCRIPTION + " TEXT," +
                 KEY_INGREDIENTS + " TEXT," +
                 KEY_DATE + " LONG," +
-                KEY_TAG + " TEXT" +
+                KEY_TAG + " TEXT," +
+                KEY_DOC_KEY + " TEXT" +
                 ")");
         db.execSQL("CREATE TABLE " + TABLE_COOK_LATER_RECIPES + "(" +
                 KEY_ID + " INTEGER PRIMARY KEY, " +

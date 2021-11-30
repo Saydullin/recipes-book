@@ -26,7 +26,7 @@ public class RecipeManager {
         this.context = context;
     }
 
-    public void addToAdded(long duration, long date, String imagePreview, String title, String ingredients, String description, String tag) {
+    public void addToAdded(long duration, long date, String imagePreview, String title, String ingredients, String description, String tag, String docKey) {
         myRecipes = new MyRecipes(context);
         Toast.makeText(context, "Image: " + imagePreview, Toast.LENGTH_LONG).show();
 
@@ -41,6 +41,7 @@ public class RecipeManager {
         contentValues.put(MyRecipes.KEY_DESCRIPTION, description);
         contentValues.put(MyRecipes.KEY_INGREDIENTS, ingredients);
         contentValues.put(MyRecipes.KEY_TAG, tag);
+        contentValues.put(MyRecipes.KEY_DOC_KEY, docKey);
 
         try {
             database.insert(MyRecipes.TABLE_ADDED_RECIPES, null, contentValues);
@@ -71,6 +72,7 @@ public class RecipeManager {
             int descriptionIndex = cursor.getColumnIndex(MyRecipes.KEY_DESCRIPTION);
             int durationIndex = cursor.getColumnIndex(MyRecipes.KEY_DURATION);
             int ingredients = cursor.getColumnIndex(MyRecipes.KEY_INGREDIENTS);
+            int docKey = cursor.getColumnIndex(MyRecipes.KEY_DOC_KEY);
 
             do {
                 recipeList.add(new Recipe(
@@ -82,8 +84,8 @@ public class RecipeManager {
                         cursor.getString(ingredients),
                         cursor.getString(tagIndex),
                         cursor.getString(titleIndex),
-                        "No Name",
-                        "No Email"));
+                        cursor.getString(docKey),
+                        "No Name"));
             } while (cursor.moveToNext());
         }
 
@@ -91,6 +93,11 @@ public class RecipeManager {
 
         return recipeList;
     }
+
+    public void deleteAdded(String id) {
+        SQLiteDatabase database = myRecipes.getWritableDatabase();
+    }
+
 }
 
 

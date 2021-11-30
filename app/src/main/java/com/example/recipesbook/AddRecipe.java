@@ -88,7 +88,6 @@ public class AddRecipe extends AppCompatActivity {
                     String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
                     requestPermissions(permissions, PERMISSION_CODE);
                 } else {
-                    Toast.makeText(AddRecipe.this, "Choose 300x200 image", Toast.LENGTH_SHORT).show();
                     pickImageFromGallery();
                 }
             } else {
@@ -124,6 +123,7 @@ public class AddRecipe extends AppCompatActivity {
                     String userEmail = prefs.getString("email", "No email");
                     String userName = prefs.getString("name", "No name");
                     String randomKey = UUID.randomUUID().toString();
+                    String docKey = UUID.randomUUID().toString();
 
                     // Add data to databases
                     Map<String, Object> recipe = new HashMap<>();
@@ -140,19 +140,21 @@ public class AddRecipe extends AppCompatActivity {
 
                     FirebaseManager firebaseManager = new FirebaseManager(this);
 
-                    Map<String, Object> res = firebaseManager.add(recipe, "recipes");
+                    Map<String, Object> res = firebaseManager.add(recipe, "recipes", docKey);
 
                     if (res.get("ok") == "true") {
                         recipeManager = new RecipeManager(this);
-                        long durationRecipe = Long.parseLong(recipeDuration.getText().toString());;
+                        long durationRecipe = Long.parseLong(recipeDuration.getText().toString());
+                        Toast.makeText(this, "Added: " + docKey, Toast.LENGTH_SHORT).show();
                         recipeManager.addToAdded(
                                 durationRecipe,
                                 timestamp,
-                                randomKey,
+                                imageName,
                                 validateTitle,
                                 validateIngredients,
                                 validateDescription,
-                                chosenTag.toLowerCase()
+                                chosenTag.toLowerCase(),
+                                docKey
                         );
                     } else {
                         Toast.makeText(AddRecipe.this, "Adding Failed", Toast.LENGTH_SHORT).show();

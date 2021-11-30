@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.recipesbook.R;
+import com.example.recipesbook.RecipeItemFull;
 import com.example.recipesbook.RecipeSingleItem;
 import com.example.recipesbook.db.PictureManager;
 import com.example.recipesbook.models.Recipe;
@@ -44,19 +45,17 @@ public class RecipeSingleAdapter extends RecyclerView.Adapter<RecipeSingleAdapte
     @Override
     public void onBindViewHolder(@NonNull RecipeSingleViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        Toast.makeText(context, "Image: " + recipes.get(position).getImage(), Toast.LENGTH_LONG).show();
-
         String picturePath = "https://firebasestorage.googleapis.com/v0/b/recipes-book-1637352602907.appspot.com/o/images%2F" + recipes.get(position).getImage() + "?alt=media&token=4130be0a-d3ea-419e-b388-f25d07499f22";
 
         holder.recipeTitle.setText(recipes.get(position).getTitle());
         holder.recipeDate.setText(recipes.get(position).getDate());
+        Toast.makeText(context, "picturePath: " + recipes.get(position).getImage(), Toast.LENGTH_LONG).show();
         Glide.with(context)
                 .load(picturePath)
-                .into(holder.recipeImage);
+                .into(holder.recipeImageFull);
 
         holder.itemView.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, RecipeSingleFullItem.class);
-            Intent intent = new Intent(context, RecipeSingleItem.class);
+            Intent intent = new Intent(context, RecipeItemFull.class);
 
             intent.putExtra("recipeImage", picturePath);
             intent.putExtra("recipeDate", recipes.get(position).getDate());
@@ -64,6 +63,7 @@ public class RecipeSingleAdapter extends RecyclerView.Adapter<RecipeSingleAdapte
             intent.putExtra("recipeDuration", recipes.get(position).getDuration());
             intent.putExtra("recipeDescription", recipes.get(position).getDescription());
             intent.putExtra("recipeIngredients", recipes.get(position).getIngredients());
+            intent.putExtra("docKey", recipes.get(position).getUserEmail());
 
             context.startActivity(intent);
         });
@@ -78,13 +78,13 @@ public class RecipeSingleAdapter extends RecyclerView.Adapter<RecipeSingleAdapte
 
         TextView recipeTitle;
         TextView recipeDate;
-        ImageView recipeImage;
+        ImageView recipeImageFull;
 
         public RecipeSingleViewHolder(@NonNull View itemView) {
             super(itemView);
 
             recipeTitle = itemView.findViewById(R.id.recipeTitle);
-            recipeImage = itemView.findViewById(R.id.recipeImagePreview);
+            recipeImageFull = itemView.findViewById(R.id.recipeImageFull);
             recipeDate = itemView.findViewById(R.id.recipeDate);
 
         }

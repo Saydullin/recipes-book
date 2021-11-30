@@ -38,14 +38,15 @@ public class FirebaseManager {
         this.recipeList = new ArrayList<>();
     }
 
-    public Map<String, Object> add(Map<String, Object> data, String collectionPath) {
+    public Map<String, Object> add(Map<String, Object> data, String collectionPath, String docKey) {
 
         db = FirebaseFirestore.getInstance();
         db.collection(collectionPath)
-                .add(data)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .document(docKey)
+                .set(data)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(@NonNull DocumentReference documentReference) {
+                    public void onSuccess(Void unused) {
                         Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -61,6 +62,30 @@ public class FirebaseManager {
 
         return result;
     }
+
+//    public Map<String, Object> add(Map<String, Object> data, String collectionPath, String docKey) {
+//
+//        db = FirebaseFirestore.getInstance();
+//        db.collection(collectionPath)
+//                .add(data)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(@NonNull DocumentReference documentReference) {
+//                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+//                errorMessage = e.getMessage();
+//                result.replace("ok", "false");
+//                result.replace("description", e.getMessage());
+//            }
+//        });
+//
+//        return result;
+//    }
 
     public List<Recipe> get(String tag) {
 

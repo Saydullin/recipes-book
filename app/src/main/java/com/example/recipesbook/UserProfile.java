@@ -105,7 +105,7 @@ public class UserProfile extends AppCompatActivity {
         button_cancel_activity = findViewById(R.id.button_cancel_activity);
         button_cancel_activity.setOnClickListener(v -> finish());
 
-        recipeImagePreview = findViewById(R.id.recipeImagePreview);
+        recipeImagePreview = findViewById(R.id.userImagePreview);
         userName = findViewById(R.id.user_name);
         userEmail = findViewById(R.id.user_email);
 
