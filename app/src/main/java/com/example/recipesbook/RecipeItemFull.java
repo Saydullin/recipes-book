@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.recipesbook.db.RecipeManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -66,6 +67,12 @@ public class RecipeItemFull extends AppCompatActivity {
             DocumentReference noteRef = db.collection("recipes").document(docKey);
 
             noteRef.delete();
+
+            RecipeManager recipeManager = new RecipeManager(this);
+
+            recipeManager.deleteAdded(docKey);
+
+            finish();
 
 //            db.collection("recipes").document(docKey)
 //                    .delete()

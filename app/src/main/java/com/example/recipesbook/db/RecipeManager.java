@@ -94,8 +94,13 @@ public class RecipeManager {
         return recipeList;
     }
 
-    public void deleteAdded(String id) {
+    public void deleteAdded(String docKey) {
+        myRecipes = new MyRecipes(context);
+
         SQLiteDatabase database = myRecipes.getWritableDatabase();
+
+        database.delete(MyRecipes.TABLE_ADDED_RECIPES, MyRecipes.KEY_DOC_KEY + "='" + docKey + "'", null);
+
     }
 
 }

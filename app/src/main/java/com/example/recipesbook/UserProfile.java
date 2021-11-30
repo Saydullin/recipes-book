@@ -85,6 +85,8 @@ public class UserProfile extends AppCompatActivity {
             no_signed_in.setVisibility(View.VISIBLE);
             signed_in.setVisibility(View.GONE);
         }
+
+        updateRecycler();
     }
 
     @Override
@@ -133,6 +135,9 @@ public class UserProfile extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+    }
+
+    public void updateRecycler() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recipeRecycle.setLayoutManager(layoutManager);
 
@@ -142,7 +147,6 @@ public class UserProfile extends AppCompatActivity {
 
         recipeSingleAdapter = new RecipeSingleAdapter(this, recipeList);
         recipeRecycle.setAdapter(recipeSingleAdapter);
-
     }
 
     private void signIn() {
