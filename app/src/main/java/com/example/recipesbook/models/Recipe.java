@@ -5,8 +5,6 @@ public class Recipe {
     long duration;
     String description, id, image, ingredients, tag, title, userEmail, userName;
 
-//    public Recipe(){}
-
     public Recipe(
             String description,
             long duration,

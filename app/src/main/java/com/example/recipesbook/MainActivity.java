@@ -8,37 +8,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.recipesbook.adapters.RecipeAdapter;
 import com.example.recipesbook.adapters.RecipesAdapter;
-import com.example.recipesbook.db.DatabaseAccess;
-import com.example.recipesbook.db.DbRecipe;
-import com.example.recipesbook.db.FirebaseManager;
-import com.example.recipesbook.db.PictureManager;
-import com.example.recipesbook.db.RecipeManager;
 import com.example.recipesbook.models.Recipe;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -52,24 +38,16 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recipeRecycle;
-//    RecyclerView recipeRecycle2;
-//    RecyclerView recipeRecycle3;
     RecipesAdapter recipesAdapter;
-    RecipeAdapter recipeAdapter;
     Drawable profileImage;
     TextView textViewResult;
-    ImageButton filterSearchView;
     ImageButton cookLaterTab;
     ImageView button_login;
     ImageButton button_add_recipe;
 
     List<Recipe> getData;
 
-    List<Recipe> recipeArrayList;
     FirebaseFirestore db;
-    FirebaseAuth mAuth;
-
-    DbRecipe dbRecipe;
 
     @Override
     protected void onStart() {
@@ -83,32 +61,6 @@ public class MainActivity extends AppCompatActivity {
             profileImage = ContextCompat.getDrawable(this, R.drawable.profile);
             button_login.setImageDrawable(profileImage);
         }
-
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            // do your stuff
-            Toast.makeText(this, "User is NOT null", Toast.LENGTH_SHORT).show();
-        } else {
-            signInAnonymously();
-            Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
-        }
-
-//        setRecipes();
-    }
-
-    private void signInAnonymously() {
-        mAuth.signInAnonymously().addOnSuccessListener(this, new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                // do your stuff
-            }
-        })
-        .addOnFailureListener(this, new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Log.e("Error", "signInAnonymously:FAILURE", exception);
-            }
-        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -117,20 +69,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAuth = FirebaseAuth.getInstance();
-
-//        recipeRecycle = findViewById(R.id.recipeRecycle);
-//        recipeRecycle.setHasFixedSize(true);
-//        recipeRecycle.setLayoutManager(new LinearLayoutManager(this));
-
         db = FirebaseFirestore.getInstance();
-        recipeArrayList = new ArrayList<Recipe>();
-        recipeAdapter = new RecipeAdapter(MainActivity.this, recipeArrayList);
-        Log.d("DocumentChange", "recipeArrayList Count is - " + recipeArrayList.size());
 
-//        eventChangeListener();
-
-//        filterSearchView = findViewById(R.id.filterSearchView);
         button_login = findViewById(R.id.button_login);
         button_add_recipe = findViewById(R.id.button_add_recipe);
 

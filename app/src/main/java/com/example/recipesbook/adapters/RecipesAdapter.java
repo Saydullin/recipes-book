@@ -1,9 +1,12 @@
 package com.example.recipesbook.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,35 +49,25 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecipesViewHolder holder, @SuppressLint("RecyclerView") int position) {
-//        getPicture.execute(recipes.get(position).getImage());
 
-//        Uri imageUri = pictureManager.getPicture(recipes.get(position).getImage());
+        String picturePath = "https://firebasestorage.googleapis.com/v0/b/recipes-book-1637352602907.appspot.com/o/images%2F" + recipes.get(position).getImage() + "?alt=media&token=4130be0a-d3ea-419e-b388-f25d07499f22";
 
         holder.recipeTitle.setText(recipes.get(position).getTitle());
         Glide.with(context)
-                .load("https://firebasestorage.googleapis.com/v0/b/recipes-book-1637352602907.appspot.com/o/images%2F" + recipes.get(position).getImage() + "?alt=media&token=4130be0a-d3ea-419e-b388-f25d07499f22")
+                .load(picturePath)
                 .into(holder.recipeImage);
-//        holder.recipeImage.setImageURI(Uri.parse(recipes.get(position).getImg()));
         holder.recipeDuration.setText(String.valueOf(recipes.get(position).getDuration()));
-//        holder.recipesIngredientsAmount.setText(recipes.get(position).getIngredientsAmount() + " ingredients");
 
-//        holder.itemView.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, RecipeItem.class);
-//
-////            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
-////                    (Activity) context,
-////                    new Pair<View, String>(holder.recipeImageCard, "ImageTransform")
-////            );
-//
-//            intent.putExtra("recipeImage", recipes.get(position).getImage());
-//            intent.putExtra("recipeTitle", recipes.get(position).getTitle());
-//            intent.putExtra("recipeDuration", recipes.get(position).getDuration());
-////            intent.putExtra("recipeIngredients", recipes.get(position).getIngredientsAmount());
-//            intent.putExtra("recipeDescription", recipes.get(position).getDescription());
-//
-////            context.startActivity(intent, options.toBundle());
-//            context.startActivity(intent);
-//        });
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, RecipeItem.class);
+
+            intent.putExtra("recipeImage", picturePath);
+            intent.putExtra("recipeTitle", recipes.get(position).getTitle());
+            intent.putExtra("recipeDuration", recipes.get(position).getDuration());
+            intent.putExtra("recipeDescription", recipes.get(position).getDescription());
+
+            context.startActivity(intent);
+        });
     }
 
     @Override

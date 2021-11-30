@@ -29,7 +29,6 @@ public class RecipeItem extends AppCompatActivity {
         recipeDescription = findViewById(R.id.recipeDescription);
         cancelButton = findViewById(R.id.recipe_item_button);
 
-        String ingredientsAmount = getIntent().getStringExtra("recipeIngredients");
         String intentImage = getIntent().getStringExtra("recipeImage");
         String intentTitle = getIntent().getStringExtra("recipeTitle");
         String intentDuration = getIntent().getStringExtra("recipeDuration");
@@ -46,7 +45,7 @@ public class RecipeItem extends AppCompatActivity {
 
         cookLaterButton.setOnClickListener(v -> {
             CookLaterManager cookLaterManager = new CookLaterManager(this);
-//            cookLaterManager.add(intentImage, intentTitle, ingredientsAmount, intentDuration, intentDescription)
+//            cookLaterManager.add(intentImage, intentTitle, ingredientsAmount, intentDuration, intentDescription);
         });
 
     }
