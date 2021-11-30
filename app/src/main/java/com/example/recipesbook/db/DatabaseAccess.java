@@ -44,31 +44,31 @@ public class DatabaseAccess {
         List<Recipe> recipeList = new ArrayList<>();
         Cursor c = db.rawQuery("SELECT * FROM recipes WHERE tag='" + tag + "'", null);
 
-        if (c.moveToFirst()) {
-            do {
-                int id = c.getInt(0);
-                int ingredientsAmount = c.getInt(4);
-                int duration = c.getInt(3);
-                String title = c.getString(1);
-                String tagName = c.getString(6);
-                String image = c.getString(2);
-                String description = c.getString(5);
-                Log.w("Error", "ID: " + id);
-                Log.w("Error", "TAG: " + tagName);
-                Log.w("Error", "TITLE: " + title);
-                Log.w("Error", "IMAGE: " + image);
-                Log.w("Error", "DURATION: " + duration);
-                Log.w("Error", "DESCRIPTION: " + description);
-                Log.w("Error", "INGREDIENTSAMOUNT: " + ingredientsAmount);
-                recipeList.add(new Recipe(
-                        id,
-                        ingredientsAmount,
-                        duration,
-                        title,
-                        image,
-                        description));
-            } while(c.moveToNext());
-        }
+//        if (c.moveToFirst()) {
+//            do {
+//                int id = c.getInt(0);
+//                int ingredientsAmount = c.getInt(4);
+//                int duration = c.getInt(3);
+//                String title = c.getString(1);
+//                String tagName = c.getString(6);
+//                String image = c.getString(2);
+//                String description = c.getString(5);
+//                Log.w("Error", "ID: " + id);
+//                Log.w("Error", "TAG: " + tagName);
+//                Log.w("Error", "TITLE: " + title);
+//                Log.w("Error", "IMAGE: " + image);
+//                Log.w("Error", "DURATION: " + duration);
+//                Log.w("Error", "DESCRIPTION: " + description);
+//                Log.w("Error", "INGREDIENTSAMOUNT: " + ingredientsAmount);
+//                recipeList.add(new Recipe(
+//                        id,
+//                        ingredientsAmount,
+//                        duration,
+//                        title,
+//                        image,
+//                        description));
+//            } while(c.moveToNext());
+//        }
 
         return recipeList;
     }

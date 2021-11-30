@@ -16,20 +16,21 @@ import com.example.recipesbook.models.Recipe;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-public class RecipeManager {
+public class CookLaterManager {
 
-    DbRecipe dbRecipe;
+    CookLater cookLater;
     Context context;
 
-    public RecipeManager(Context context) {
+    public CookLaterManager(Context context) {
         this.context = context;
     }
 
     public void add(String imagePreview, String title, int ingredientsAmount, int duration, String description, String tag) {
-        dbRecipe = new DbRecipe(context);
+        cookLater = new CookLater(context);
 
-        SQLiteDatabase database = dbRecipe.getWritableDatabase();
+        SQLiteDatabase database = cookLater.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
@@ -45,17 +46,18 @@ public class RecipeManager {
 
     public List<Recipe> get(String tag) {
 
-        dbRecipe = new DbRecipe(context);
+        cookLater = new CookLater(context);
+
         Cursor cursor;
 
         List<Recipe> recipeList = new ArrayList<>();
 
-        SQLiteDatabase database = dbRecipe.getWritableDatabase();
+        SQLiteDatabase database = cookLater.getWritableDatabase();
 
         if (tag.equals("all")) {
             cursor = database.query(DbRecipe.TABLE_RECIPES, null, null, null, null, null, null);
         } else {
-            cursor = database.rawQuery("SELECT * FROM " + DbRecipe.TABLE_RECIPES + " WHERE " + dbRecipe.KEY_TAG + "='" + tag + "'", null);
+            cursor = database.rawQuery("SELECT * FROM " + DbRecipe.TABLE_RECIPES + " WHERE " + cookLater.KEY_TAG + "='" + tag + "'", null);
         }
 
 //        if (cursor.moveToFirst()) {
@@ -74,9 +76,10 @@ public class RecipeManager {
 ////                    durationFormat.append(duration / 60).append("h ");
 ////                }
 ////                durationFormat.append(duration % 60).append("minR");
+//                String randomKey = UUID.randomUUID().toString();
 //
 //                recipeList.add(new Recipe(
-//                        cursor.getInt(idIndex),
+//                        randomKey,
 //                        cursor.getInt(ingredientsAmountIndex),
 //                        duration,
 //                        cursor.getString(titleIndex),

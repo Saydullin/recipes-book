@@ -8,32 +8,49 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.recipesbook.db.CookLaterManager;
 
 public class RecipeItem extends AppCompatActivity {
 
     ImageView imageFullPreview;
+    Button cancelButton, cookLaterButton;
+    TextView recipeTitle, recipeDuration, recipeDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_item);
 
-        TextView recipeTitle = findViewById(R.id.recipeTitle);
+        cookLaterButton = findViewById(R.id.cook_later_button);
         imageFullPreview = findViewById(R.id.imageFullPreview);
-        TextView recipeDuration = findViewById(R.id.recipeDuration);
-        TextView recipeDescription = findViewById(R.id.recipeDescription);
-        Button recipe_item_button = findViewById(R.id.recipe_item_button);
+
+        recipeTitle = findViewById(R.id.recipeTitle);
+        recipeDuration = findViewById(R.id.recipeDuration);
+        recipeDescription = findViewById(R.id.recipeDescription);
+        cancelButton = findViewById(R.id.recipe_item_button);
+
+        String ingredientsAmount = getIntent().getStringExtra("recipeIngredients");
+        String intentImage = getIntent().getStringExtra("recipeImage");
+        String intentTitle = getIntent().getStringExtra("recipeTitle");
+        String intentDuration = getIntent().getStringExtra("recipeDuration");
+        String intentDescription = getIntent().getStringExtra("recipeDescription");
 
         Glide.with(this)
-                .load(getIntent().getStringExtra("recipeImage"))
+                .load(intentImage)
                 .into(imageFullPreview);
-        recipeTitle.setText(getIntent().getStringExtra("recipeTitle"));
-        recipeDuration.setText(getIntent().getStringExtra("recipeDuration"));
-        recipeDescription.setText(getIntent().getStringExtra("recipeDescription"));
+        recipeTitle.setText(intentTitle);
+        recipeDuration.setText(intentDuration);
+        recipeDescription.setText(intentDescription);
 
-        recipe_item_button.setOnClickListener(v -> finish());
+        cancelButton.setOnClickListener(v -> finish());
+
+        cookLaterButton.setOnClickListener(v -> {
+            CookLaterManager cookLaterManager = new CookLaterManager(this);
+//            cookLaterManager.add(intentImage, intentTitle, ingredientsAmount, intentDuration, intentDescription)
+        });
 
     }
+
 }
 
 

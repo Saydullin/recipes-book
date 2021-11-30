@@ -151,6 +151,7 @@ public class UserProfile extends AppCompatActivity {
                         Toast.makeText(UserProfile.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
                         finish();
                     }
+
                 });
     }
 

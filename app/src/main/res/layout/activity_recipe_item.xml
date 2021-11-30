@@ -111,6 +111,7 @@
                 android:id="@+id/recipe_item_button"
                 android:paddingHorizontal="20dp"
                 android:backgroundTint="@color/button_cancel"
+                android:layout_marginHorizontal="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
@@ -120,6 +121,19 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recipeDescription" />
+
+            <Button
+                android:id="@+id/cook_later_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginHorizontal="15dp"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="15dp"
+                android:text="@string/cook_later"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewFullImage" />
 
         </LinearLayout>
 

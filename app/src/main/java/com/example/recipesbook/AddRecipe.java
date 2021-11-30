@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -110,14 +111,22 @@ public class AddRecipe extends AppCompatActivity {
                 String imageName = pictureManager.addPicture(imageUri, null);
 
                 if (!imageName.equals("")) {
+                    SharedPreferences prefs = getSharedPreferences("userData", MODE_PRIVATE);
+                    String userEmail = prefs.getString("email", "No email");
+                    String userName = prefs.getString("name", "No name");
+                    String randomKey = UUID.randomUUID().toString();
+
                     // Add data to databases
                     Map<String, Object> recipe = new HashMap<>();
-                    recipe.put("userEmail", "saydullinweb@gmail.com");
+                    recipe.put("userEmail", userEmail);
+                    recipe.put("userName", userName);
                     recipe.put("title", validateTitle);
                     recipe.put("image", imageName);
                     recipe.put("duration", validateDuration);
-                    recipe.put("ingAmount", validateIngredientsAmount);
+                    recipe.put("id", randomKey);
+                    recipe.put("ingredients", "5 tomatoes, 4 potatoes, 2 onions, sold, oil");
                     recipe.put("description", validateDescription);
+                    recipe.put("tag", "soups");
 
                     FirebaseManager firebaseManager = new FirebaseManager(this);
 
@@ -128,6 +137,8 @@ public class AddRecipe extends AppCompatActivity {
                     } else {
                         Toast.makeText(AddRecipe.this, "Adding Failed", Toast.LENGTH_SHORT).show();
                     }
+
+                    firebaseManager.get("soups");
                 }
 //                recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription, "salads");
             } catch(NumberFormatException e) {
