@@ -82,39 +82,17 @@
                 android:paddingVertical="15dp"
                 android:textSize="16sp" />
 
-            <!--        TODO: Реализовать добавление описания, путём шаговой инструкции -->
-            <!--         Пользователь вводит первый ингредиент, и сразу же появляется -->
-            <!--         второе поле, и у каждого нумерация (Шаг 1, ...), в виде заголовка. -->
-            <!--         с отступом слева. -->
-
-            <!--        <EditText-->
-            <!--            android:id="@+id/editText2"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:layout_marginTop="15dp"-->
-            <!--            android:autofillHints="default"-->
-            <!--            android:background="@drawable/border_radius"-->
-            <!--            android:backgroundTint="@color/theme_bg_light"-->
-            <!--            android:fontFamily="@font/montserrat"-->
-            <!--            android:hint="@string/steps_amount"-->
-            <!--            android:inputType="number"-->
-            <!--            android:paddingHorizontal="15dp"-->
-            <!--            android:paddingVertical="15dp"-->
-            <!--            android:textSize="16sp" />-->
-
-            <!--        TODO: Здесь будет селект категорий-->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/ingredients_amount_text"
+                android:text="@string/ingredients_text"
                 android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/recipeIngredientsAmount"
+                android:id="@+id/recipeIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="default"
@@ -122,8 +100,8 @@
                 android:background="@drawable/border_radius"
                 android:backgroundTint="@color/theme_bg_light"
                 android:fontFamily="@font/montserrat"
-                android:hint="@string/ingredients_amount_text"
-                android:inputType="number"
+                android:hint="@string/ingredients_text_ex"
+                android:inputType="text"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="15dp"
                 android:textSize="16sp" />
@@ -157,6 +135,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
+                android:text="@string/choose_tag"
+                android:fontFamily="@font/montserrat"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/recipesSpinner"
+                android:background="@drawable/border_radius"
+                android:backgroundTint="@color/theme_bg_light"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/recipes_array" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/description_text"
                 android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
@@ -175,8 +174,6 @@
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="15dp"
                 android:textSize="16sp" />
-
-            <!--        TODO: Реализовать добавления ингредиентов в виде списка-->
 
         </LinearLayout>
 

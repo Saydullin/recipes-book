@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -42,10 +44,11 @@ public class AddRecipe extends AppCompatActivity {
     EditText recipeTitle;
     EditText recipeDuration;
     EditText recipeDescription;
-    EditText recipeIngredientsAmount;
+    EditText recipeIngredients;
     Uri imageUri;
     FirebaseStorage storage;
     StorageReference storageReference;
+    Spinner recipesSpinner;
     Button button_cancel_activity;
     Button submit_add_recipe;
     ImageView recipeImagePreview;
@@ -63,10 +66,11 @@ public class AddRecipe extends AppCompatActivity {
         storageReference = storage.getReference();
 
         recipeTitle = findViewById(R.id.recipeTitle);
+        recipesSpinner = findViewById(R.id.recipesSpinner);
         recipeDuration = findViewById(R.id.recipeDuration);
         recipeDescription = findViewById(R.id.recipeDescription);
         recipeImagePreview = findViewById(R.id.recipeImagePreview);
-        recipeIngredientsAmount = findViewById(R.id.recipeIngredientsAmount);
+        recipeIngredients = findViewById(R.id.recipeIngredients);
 
         button_cancel_activity = findViewById(R.id.button_cancel_activity);
         submit_add_recipe = findViewById(R.id.submit_add_recipe);
@@ -96,21 +100,23 @@ public class AddRecipe extends AppCompatActivity {
             try {
                 String validateImage = recipeImagePreview.getResources().toString();
                 String validateTitle = recipeTitle.getText().toString().trim();
+                String validateIngredients = recipeIngredients.getText().toString().trim();
                 String validateDescription= recipeDescription.getText().toString().trim();
                 int validateDuration = Integer.parseInt(recipeDuration.getText().toString());
-                int validateIngredientsAmount = Integer.parseInt(recipeIngredientsAmount.getText().toString());
 
                 // Validate received data from user
                 validate.checkString("image", validateImage, new int[] {5, -1});
                 validate.checkString("title", validateTitle, new int[] {3, 35});
-                validate.checkInt("ingredients amount", validateIngredientsAmount, new int[] {2, 50});
                 validate.checkInt("duration", validateDuration, new int[] {5, 1440});
+                validate.checkString("ingredients", validateIngredients, new int[] {3, 300});
                 validate.checkString("description", validateDescription, new int[] {10, 400});
 
                 PictureManager pictureManager = new PictureManager(this);
                 String imageName = pictureManager.addPicture(imageUri, null);
 
                 if (!imageName.equals("")) {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String chosenTag = recipesSpinner.getSelectedItem().toString();
                     SharedPreferences prefs = getSharedPreferences("userData", MODE_PRIVATE);
                     String userEmail = prefs.getString("email", "No email");
                     String userName = prefs.getString("name", "No name");
@@ -119,14 +125,15 @@ public class AddRecipe extends AppCompatActivity {
                     // Add data to databases
                     Map<String, Object> recipe = new HashMap<>();
                     recipe.put("userEmail", userEmail);
+                    recipe.put("date", timestamp);
                     recipe.put("userName", userName);
                     recipe.put("title", validateTitle);
                     recipe.put("image", imageName);
                     recipe.put("duration", validateDuration);
                     recipe.put("id", randomKey);
-                    recipe.put("ingredients", "5 tomatoes, 4 potatoes, 2 onions, sold, oil");
+                    recipe.put("ingredients", validateIngredients);
                     recipe.put("description", validateDescription);
-                    recipe.put("tag", "soups");
+                    recipe.put("tag", chosenTag.toLowerCase());
 
                     FirebaseManager firebaseManager = new FirebaseManager(this);
 

@@ -1,13 +1,22 @@
 package com.example.recipesbook.models;
 
+import android.annotation.SuppressLint;
+
+import com.google.firebase.Timestamp;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class Recipe {
 
+    Timestamp date;
     long duration;
     String description, id, image, ingredients, tag, title, userEmail, userName;
 
     public Recipe(
             String description,
             long duration,
+            Timestamp date,
             String id,
             String image,
             String ingredients,
@@ -18,6 +27,7 @@ public class Recipe {
     ) {
         this.id = id;
         this.tag = tag;
+        this.date = date;
         this.image = image;
         this.title = title;
         this.duration = duration;
@@ -25,6 +35,15 @@ public class Recipe {
         this.userName = userName;
         this.ingredients = ingredients;
         this.description = description;
+    }
+
+    public String getDate() {
+        @SuppressLint("SimpleDateFormat") DateFormat f = new SimpleDateFormat("MM.dd HH:mm");
+        return f.format(date);
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
     }
 
     public String getTag() {
@@ -83,21 +102,17 @@ public class Recipe {
         this.title = title;
     }
 
-//    public String getDuration() {
-//        StringBuilder durationFormat = new StringBuilder();
-//
-//        if (duration / 60 >= 1) {
-//            durationFormat.append(duration / 60).append("h ");
-//        }
-//        if (duration % 60 >= 1) {
-//            durationFormat.append(duration % 60).append("min");
-//        }
-//
-//        return durationFormat.toString();
-//    }
+    public String getDuration() {
+        StringBuilder durationFormat = new StringBuilder();
 
-    public long getDuration() {
-        return duration;
+        if (duration / 60 >= 1) {
+            durationFormat.append(duration / 60).append("h ");
+        }
+        if (duration % 60 >= 1) {
+            durationFormat.append(duration % 60).append("min");
+        }
+
+        return durationFormat.toString();
     }
 
     public void setDuration(long duration) {

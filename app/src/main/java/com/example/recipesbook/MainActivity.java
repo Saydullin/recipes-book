@@ -30,6 +30,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -100,6 +101,13 @@ public class MainActivity extends AppCompatActivity {
         getRecipesByTag("soups", findViewById(R.id.recipeSoupRecycler));
         getRecipesByTag("desserts", findViewById(R.id.recipeDessertsRecycler));
         getRecipesByTag("salads", findViewById(R.id.recipeSaladsRecycler));
+        getRecipesByTag("fastFood", findViewById(R.id.recipeFastFoodRecycler));
+        getRecipesByTag("seafood", findViewById(R.id.recipeSeafoodRecycler));
+        getRecipesByTag("drinks", findViewById(R.id.recipeDrinksRecycler));
+        getRecipesByTag("authors", findViewById(R.id.recipeAuthorsRecycler));
+        getRecipesByTag("other", findViewById(R.id.recipeOtherRecycler));
+        getRecipesByTag("dietary", findViewById(R.id.recipeDietaryRecycler));
+        getRecipesByTag("sauces", findViewById(R.id.recipeSaucesRecycler));
     }
 
     private void eventChangeListener() {
@@ -141,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         getData = new ArrayList<>();
 
-        db.collection("recipes").whereEqualTo("tag", tag).get()
+        db.collection("recipes").whereEqualTo("tag", tag.toLowerCase()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @SuppressLint("SetTextI18n")
                     @Override
@@ -154,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                                 getData.add(new Recipe(
                                         document.getString("description"),
                                         document.getLong("duration"),
+                                        document.getTimestamp("date"),
                                         document.getString("id"),
                                         document.getString("image"),
                                         document.getString("ingredients"),
