@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton cookLaterTab;
     ImageView button_login;
     ImageButton button_add_recipe;
+    Handler handlerSplash;
 
     List<Recipe> getData;
 
@@ -162,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                                 getData.add(new Recipe(
                                         document.getString("description"),
                                         document.getLong("duration"),
-                                        document.getTimestamp("date"),
+                                        document.getLong("date"),
                                         document.getString("id"),
                                         document.getString("image"),
                                         document.getString("ingredients"),

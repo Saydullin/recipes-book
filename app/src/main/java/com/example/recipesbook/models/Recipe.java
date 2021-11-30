@@ -1,22 +1,18 @@
 package com.example.recipesbook.models;
 
-import android.annotation.SuppressLint;
-
-import com.google.firebase.Timestamp;
-
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Recipe {
 
-    Timestamp date;
-    long duration;
+    long duration, date;
     String description, id, image, ingredients, tag, title, userEmail, userName;
 
     public Recipe(
             String description,
             long duration,
-            Timestamp date,
+            long date,
             String id,
             String image,
             String ingredients,
@@ -38,11 +34,12 @@ public class Recipe {
     }
 
     public String getDate() {
-        @SuppressLint("SimpleDateFormat") DateFormat f = new SimpleDateFormat("MM.dd HH:mm");
-        return f.format(date);
+        Date netDate = new Date(System.currentTimeMillis());
+        SimpleDateFormat sfd = new SimpleDateFormat("dd MMMM', at' HH:mm", Locale.forLanguageTag("en"));
+        return sfd.format(netDate);
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
@@ -104,12 +101,14 @@ public class Recipe {
 
     public String getDuration() {
         StringBuilder durationFormat = new StringBuilder();
+        String pluralHours = duration / 60 > 1 ? "hours " : "hour ";
+        String pluralMinutes = duration % 60 > 1 ? "minutes" : "minute";
 
         if (duration / 60 >= 1) {
-            durationFormat.append(duration / 60).append("h ");
+            durationFormat.append(duration / 60).append(" ").append(pluralHours);
         }
         if (duration % 60 >= 1) {
-            durationFormat.append(duration % 60).append("min");
+            durationFormat.append(duration % 60).append(" ").append(pluralMinutes);
         }
 
         return durationFormat.toString();

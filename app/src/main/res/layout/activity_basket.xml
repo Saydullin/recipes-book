@@ -40,7 +40,6 @@
         <Button
             android:id="@+id/button_cancel_activity"
             android:paddingHorizontal="20dp"
-            android:backgroundTint="@color/button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
@@ -52,6 +51,7 @@
             android:id="@+id/submit_add_recipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/button_accent"
             android:layout_marginHorizontal="30dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/submit_button"

@@ -2,6 +2,8 @@ package com.example.recipesbook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,7 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.recipesbook.adapters.RecipeSingleAdapter;
+import com.example.recipesbook.adapters.RecipesAdapter;
 import com.example.recipesbook.db.FirebaseManager;
+import com.example.recipesbook.db.RecipeManager;
+import com.example.recipesbook.models.Recipe;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -29,7 +35,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,6 +54,10 @@ public class UserProfile extends AppCompatActivity {
     TextView userEmail;
     Button change_accounts;
     LinearLayout no_signed_in;
+    RecyclerView recipeRecycle;
+    RecipeSingleAdapter recipeSingleAdapter;
+    RecipeManager recipeManager;
+    List<Recipe> recipeList;
     LinearLayout signed_in;
     Button sign_in;
     Button sign_out;
@@ -79,6 +91,9 @@ public class UserProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        recipeRecycle = findViewById(R.id.myRecipesRecycler);
+        recipeList = new ArrayList<>();
 
         no_signed_in = findViewById(R.id.no_signed_in);
         signed_in = findViewById(R.id.signed_in);
@@ -117,6 +132,16 @@ public class UserProfile extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        recipeRecycle.setLayoutManager(layoutManager);
+
+        recipeManager = new RecipeManager(this);
+
+        recipeList = recipeManager.getFromAdded();
+
+        recipeSingleAdapter = new RecipeSingleAdapter(this, recipeList);
+        recipeRecycle.setAdapter(recipeSingleAdapter);
 
     }
 

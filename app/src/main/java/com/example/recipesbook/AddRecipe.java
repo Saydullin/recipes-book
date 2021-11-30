@@ -11,9 +11,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Scroller;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,7 @@ public class AddRecipe extends AppCompatActivity {
     Uri imageUri;
     FirebaseStorage storage;
     StorageReference storageReference;
+    RecipeManager recipeManager;
     Spinner recipesSpinner;
     Button button_cancel_activity;
     Button submit_add_recipe;
@@ -89,7 +92,7 @@ public class AddRecipe extends AppCompatActivity {
                     pickImageFromGallery();
                 }
             } else {
-                Toast.makeText(AddRecipe.this, "Your os is too old", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddRecipe.this, "Your OS is too old", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -115,7 +118,7 @@ public class AddRecipe extends AppCompatActivity {
                 String imageName = pictureManager.addPicture(imageUri, null);
 
                 if (!imageName.equals("")) {
-                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    long timestamp = System.currentTimeMillis();
                     String chosenTag = recipesSpinner.getSelectedItem().toString();
                     SharedPreferences prefs = getSharedPreferences("userData", MODE_PRIVATE);
                     String userEmail = prefs.getString("email", "No email");
@@ -140,12 +143,24 @@ public class AddRecipe extends AppCompatActivity {
                     Map<String, Object> res = firebaseManager.add(recipe, "recipes");
 
                     if (res.get("ok") == "true") {
-                        Toast.makeText(AddRecipe.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                        recipeManager = new RecipeManager(this);
+                        long durationRecipe = Long.parseLong(recipeDuration.getText().toString());;
+                        recipeManager.addToAdded(
+                                durationRecipe,
+                                timestamp,
+                                randomKey,
+                                validateTitle,
+                                validateIngredients,
+                                validateDescription,
+                                chosenTag.toLowerCase()
+                        );
                     } else {
                         Toast.makeText(AddRecipe.this, "Adding Failed", Toast.LENGTH_SHORT).show();
                     }
 
-                    firebaseManager.get("soups");
+//                    firebaseManager.get("soups");
+                } else {
+                    Toast.makeText(this, "You did not added image!", Toast.LENGTH_SHORT).show();
                 }
 //                recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription, "salads");
             } catch(NumberFormatException e) {
@@ -182,7 +197,6 @@ public class AddRecipe extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             assert data != null;
-            Toast.makeText(AddRecipe.this, data.getData().toString(), Toast.LENGTH_LONG).show();
             imageURI = data.getData().toString();
             imageUri = data.getData();
             recipeImagePreview.setImageURI(data.getData());

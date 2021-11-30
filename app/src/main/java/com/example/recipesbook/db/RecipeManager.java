@@ -19,73 +19,73 @@ import java.util.List;
 
 public class RecipeManager {
 
-    DbRecipe dbRecipe;
+    MyRecipes myRecipes;
     Context context;
 
     public RecipeManager(Context context) {
         this.context = context;
     }
 
-    public void add(String imagePreview, String title, int ingredientsAmount, int duration, String description, String tag) {
-        dbRecipe = new DbRecipe(context);
+    public void addToAdded(long duration, long date, String imagePreview, String title, String ingredients, String description, String tag) {
+        myRecipes = new MyRecipes(context);
+        Toast.makeText(context, "Image: " + imagePreview, Toast.LENGTH_LONG).show();
 
-        SQLiteDatabase database = dbRecipe.getWritableDatabase();
+        SQLiteDatabase database = myRecipes.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(DbRecipe.KEY_IMAGE, imagePreview);
-        contentValues.put(DbRecipe.KEY_TITLE, title);
-        contentValues.put(DbRecipe.KEY_DURATION, duration);
-        contentValues.put(DbRecipe.KEY_DESCRIPTION, description);
-        contentValues.put(DbRecipe.KEY_INGREDIENTS_AMOUNT, ingredientsAmount);
-        contentValues.put(DbRecipe.KEY_TAG, tag);
+        contentValues.put(MyRecipes.KEY_IMAGE, imagePreview);
+        contentValues.put(MyRecipes.KEY_TITLE, title);
+        contentValues.put(MyRecipes.KEY_DURATION, duration);
+        contentValues.put(MyRecipes.KEY_DATE, date);
+        contentValues.put(MyRecipes.KEY_DESCRIPTION, description);
+        contentValues.put(MyRecipes.KEY_INGREDIENTS, ingredients);
+        contentValues.put(MyRecipes.KEY_TAG, tag);
 
-        database.insert(DbRecipe.TABLE_RECIPES, null, contentValues);
+        try {
+            database.insert(MyRecipes.TABLE_ADDED_RECIPES, null, contentValues);
+            Toast.makeText(context, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Data NOT Saved: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
-    public List<Recipe> get(String tag) {
+    public List<Recipe> getFromAdded() {
 
-        dbRecipe = new DbRecipe(context);
+        myRecipes = new MyRecipes(context);
         Cursor cursor;
 
         List<Recipe> recipeList = new ArrayList<>();
 
-        SQLiteDatabase database = dbRecipe.getWritableDatabase();
+        SQLiteDatabase database = myRecipes.getWritableDatabase();
 
-        if (tag.equals("all")) {
-            cursor = database.query(DbRecipe.TABLE_RECIPES, null, null, null, null, null, null);
-        } else {
-            cursor = database.rawQuery("SELECT * FROM " + DbRecipe.TABLE_RECIPES + " WHERE " + dbRecipe.KEY_TAG + "='" + tag + "'", null);
+        cursor = database.query(MyRecipes.TABLE_ADDED_RECIPES, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(MyRecipes.KEY_ID);
+            int imageIndex = cursor.getColumnIndex(MyRecipes.KEY_IMAGE);
+            int titleIndex = cursor.getColumnIndex(MyRecipes.KEY_TITLE);
+            int dateIndex = cursor.getColumnIndex(MyRecipes.KEY_DATE);
+            int tagIndex = cursor.getColumnIndex(MyRecipes.KEY_TAG);
+            int descriptionIndex = cursor.getColumnIndex(MyRecipes.KEY_DESCRIPTION);
+            int durationIndex = cursor.getColumnIndex(MyRecipes.KEY_DURATION);
+            int ingredients = cursor.getColumnIndex(MyRecipes.KEY_INGREDIENTS);
+
+            do {
+                recipeList.add(new Recipe(
+                        cursor.getString(descriptionIndex),
+                        cursor.getLong(durationIndex),
+                        cursor.getLong(dateIndex),
+                        cursor.getString(idIndex),
+                        cursor.getString(imageIndex),
+                        cursor.getString(ingredients),
+                        cursor.getString(tagIndex),
+                        cursor.getString(titleIndex),
+                        "No Name",
+                        "No Email"));
+            } while (cursor.moveToNext());
         }
-
-//        if (cursor.moveToFirst()) {
-//            int idIndex = cursor.getColumnIndex(DbRecipe.KEY_ID);
-//            int imageIndex = cursor.getColumnIndex(DbRecipe.KEY_IMAGE);
-//            int titleIndex = cursor.getColumnIndex(DbRecipe.KEY_TITLE);
-//            int descriptionIndex = cursor.getColumnIndex(DbRecipe.KEY_DESCRIPTION);
-//            int durationIndex = cursor.getColumnIndex(DbRecipe.KEY_DURATION);
-//            int ingredientsAmountIndex = cursor.getColumnIndex(DbRecipe.KEY_INGREDIENTS_AMOUNT);
-//            int duration;
-//            StringBuilder durationFormat = new StringBuilder();
-//
-//            do {
-//                duration = cursor.getInt(durationIndex);
-////                if (duration / 60 >= 1) {
-////                    durationFormat.append(duration / 60).append("h ");
-////                }
-////                durationFormat.append(duration % 60).append("minR");
-//
-//                recipeList.add(new Recipe(
-//                        cursor.getInt(idIndex),
-//                        cursor.getInt(ingredientsAmountIndex),
-//                        duration,
-//                        cursor.getString(titleIndex),
-//                        cursor.getString(imageIndex),
-//                        cursor.getString(descriptionIndex)));
-//
-//                durationFormat.delete(0, durationFormat.length());
-//            } while (cursor.moveToNext());
-//        }
 
         cursor.close();
 

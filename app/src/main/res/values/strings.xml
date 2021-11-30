@@ -46,7 +46,7 @@
     <string name="cancel_text" tools:ignore="ButtonCase">Cancel</string>
     <string name="steps_amount">Steps amount</string>
     <string name="ingredients_text">Ingredients (separate by commas)</string>
-    <string name="ingredients_text_ex">5 tomatoes, 3 onions, oil, ....</string>
+    <string name="ingredients_text_ex">5 tomatoes, 3 onions or garlics, oil, ....</string>
     <string name="duration_text">Duration (min). Enter «90» for ‹1h 30min›</string>
     <string name="duration_text_ex">120</string>
     <string name="recipes_book_title">Recipe`s Book</string>
@@ -78,8 +78,10 @@
     <string name="drinks_text">Drinks</string>
     <string name="authors_text">Authors</string>
     <string name="other_text">Other</string>
+    <string name="ingredients_title">Ingredients</string>
+    <string name="my_recipes_text">My recipes</string>
 
-    <string-array color="#838383" name="recipes_array">
+    <string-array name="recipes_array" color="#838383">
         <item color="#838383">Soups</item>
         <item>Desserts</item>
         <item>Salads</item>

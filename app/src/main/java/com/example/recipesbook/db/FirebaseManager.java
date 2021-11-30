@@ -77,7 +77,7 @@ public class FirebaseManager {
                             getData.add(new Recipe(
                                     document.getString("description"),
                                     document.getLong("duration"),
-                                    document.getTimestamp("date"),
+                                    document.getLong("date"),
                                     document.getString("id"),
                                     document.getString("image"),
                                     document.getString("ingredients"),

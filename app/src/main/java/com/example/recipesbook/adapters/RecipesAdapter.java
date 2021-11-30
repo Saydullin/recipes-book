@@ -53,18 +53,22 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         String picturePath = "https://firebasestorage.googleapis.com/v0/b/recipes-book-1637352602907.appspot.com/o/images%2F" + recipes.get(position).getImage() + "?alt=media&token=4130be0a-d3ea-419e-b388-f25d07499f22";
 
         holder.recipeTitle.setText(recipes.get(position).getTitle());
+        holder.recipeAuthor.setText("By " + recipes.get(position).getUserName());
         Glide.with(context)
                 .load(picturePath)
                 .into(holder.recipeImage);
-        holder.recipeDuration.setText(String.valueOf(recipes.get(position).getDuration()));
+        holder.recipeDuration.setText(recipes.get(position).getDuration().trim() + " of cooking");
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RecipeItem.class);
 
             intent.putExtra("recipeImage", picturePath);
+            intent.putExtra("recipeAuthor", recipes.get(position).getUserName());
+            intent.putExtra("recipeDate", recipes.get(position).getDate());
             intent.putExtra("recipeTitle", recipes.get(position).getTitle());
             intent.putExtra("recipeDuration", recipes.get(position).getDuration());
             intent.putExtra("recipeDescription", recipes.get(position).getDescription());
+            intent.putExtra("recipeIngredients", recipes.get(position).getIngredients());
 
             context.startActivity(intent);
         });
@@ -79,7 +83,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
 
         TextView recipeTitle;
         TextView recipeDuration;
-//        TextView recipesIngredientsAmount;
+        TextView recipeAuthor;
         ImageView recipeImage;
 //        CardView recipeImageCard;
 
@@ -89,6 +93,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
             recipeTitle = itemView.findViewById(R.id.recipeTitle);
             recipeImage = itemView.findViewById(R.id.recipeImage);
             recipeDuration = itemView.findViewById(R.id.recipeDuration);
+            recipeAuthor = itemView.findViewById(R.id.recipeAuthor);
 //            recipeImageCard = itemView.findViewById(R.id.CardImage);
 //            recipesIngredientsAmount = itemView.findViewById((R.id.recipesIngredientsAmount));
 

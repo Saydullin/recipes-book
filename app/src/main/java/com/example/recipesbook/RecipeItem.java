@@ -14,7 +14,7 @@ public class RecipeItem extends AppCompatActivity {
 
     ImageView imageFullPreview;
     Button cancelButton, cookLaterButton;
-    TextView recipeTitle, recipeDuration, recipeDescription;
+    TextView recipeTitle, recipeDuration, recipeDescription, recipeIngredients, recipeAuthor, recipeDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,22 +24,31 @@ public class RecipeItem extends AppCompatActivity {
         cookLaterButton = findViewById(R.id.cook_later_button);
         imageFullPreview = findViewById(R.id.imageFullPreview);
 
+        recipeDate = findViewById(R.id.recipeDate);
+        recipeAuthor = findViewById(R.id.recipeAuthor);
         recipeTitle = findViewById(R.id.recipeTitle);
         recipeDuration = findViewById(R.id.recipeDuration);
         recipeDescription = findViewById(R.id.recipeDescription);
+        recipeIngredients = findViewById(R.id.recipeIngredients);
         cancelButton = findViewById(R.id.recipe_item_button);
 
         String intentImage = getIntent().getStringExtra("recipeImage");
         String intentTitle = getIntent().getStringExtra("recipeTitle");
+        String intentDate = "Published on " + getIntent().getStringExtra("recipeDate");
+        String intentAuthor = "By " + getIntent().getStringExtra("recipeAuthor");
         String intentDuration = getIntent().getStringExtra("recipeDuration");
         String intentDescription = getIntent().getStringExtra("recipeDescription");
+        String intentIngredients = getIntent().getStringExtra("recipeIngredients");
 
         Glide.with(this)
                 .load(intentImage)
                 .into(imageFullPreview);
+        recipeDate.setText(intentDate);
         recipeTitle.setText(intentTitle);
+        recipeAuthor.setText(intentAuthor);
         recipeDuration.setText(intentDuration);
         recipeDescription.setText(intentDescription);
+        recipeIngredients.setText(intentIngredients);
 
         cancelButton.setOnClickListener(v -> finish());
 

@@ -18,7 +18,7 @@
     <color name="white">#FFFFFF</color>
     <color name="colorPrimaryDark">#E7A870</color>
 
-    <color name="button_cancel">#00B08F</color>
+    <color name="button_accent">#00B08F</color>
 </resources>
 
 

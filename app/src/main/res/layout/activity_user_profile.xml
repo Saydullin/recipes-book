@@ -119,6 +119,8 @@
                     android:paddingHorizontal="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/button_accent"
+                    android:textColor="@color/white"
                     android:layout_marginVertical="15dp"
                     android:text="@string/change_account"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -128,6 +130,29 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="15dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/my_recipes_text"
+            android:gravity="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myRecipesRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@+id/textViewResult" />
 
         <LinearLayout
             android:id="@+id/no_signed_in"
@@ -169,8 +194,6 @@
             <Button
                 android:id="@+id/button_cancel_activity"
                 android:paddingHorizontal="20dp"
-                android:backgroundTint="@color/button_cancel"
-                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
