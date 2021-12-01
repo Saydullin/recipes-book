@@ -84,6 +84,7 @@
     <string name="delete_text">Delete</string>
     <string name="editing_text">[Editing]</string>
     <string name="cook_later_text">[Cook Later]</string>
+    <string name="here_will_be_a_list_of_recipes_added_to_cook_later">Here will be a list of recipes added to \'cook later\'.</string>
 
     <string-array name="recipes_array" color="#838383">
         <item color="#838383">Soups</item>

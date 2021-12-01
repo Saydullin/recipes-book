@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.recipesbook.adapters.RecipeLaterAdapter;
 import com.example.recipesbook.db.RecipeManager;
@@ -18,6 +20,7 @@ public class BasketActivity extends AppCompatActivity {
     Button cancelButton;
     RecyclerView recipeRecycle;
     RecipeLaterAdapter recipeLaterAdapter;
+    TextView captionCookLater;
     RecipeManager recipeManager;
     List<Recipe> recipeList;
 
@@ -35,6 +38,7 @@ public class BasketActivity extends AppCompatActivity {
 
         recipeRecycle = findViewById(R.id.myRecipesRecyclerLater);
         cancelButton = findViewById(R.id.button_cancel_activity);
+        captionCookLater = findViewById(R.id.captionCookLater);
 
         cancelButton.setOnClickListener(v -> finish());
     }
@@ -46,6 +50,12 @@ public class BasketActivity extends AppCompatActivity {
         recipeManager = new RecipeManager(this);
 
         recipeList = recipeManager.getFromLater();
+        recipeRecycle.setVisibility(View.GONE);
+        captionCookLater.setVisibility(View.VISIBLE);
+        if (recipeList.size() > 0) {
+            recipeRecycle.setVisibility(View.VISIBLE);
+            captionCookLater.setVisibility(View.GONE);
+        }
 
         recipeLaterAdapter = new RecipeLaterAdapter(this, recipeList);
         recipeRecycle.setAdapter(recipeLaterAdapter);

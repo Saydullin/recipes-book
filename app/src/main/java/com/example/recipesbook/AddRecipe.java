@@ -111,7 +111,7 @@ public class AddRecipe extends AppCompatActivity {
                 validate.checkString("title", validateTitle, new int[] {3, 35});
                 validate.checkInt("duration", validateDuration, new int[] {5, 1440});
                 validate.checkString("ingredients", validateIngredients, new int[] {3, 300});
-                validate.checkString("description", validateDescription, new int[] {10, 400});
+                validate.checkString("description", validateDescription, new int[] {10, 2000});
 
                 PictureManager pictureManager = new PictureManager(this);
                 String imageName = pictureManager.addPicture(imageUri, null);

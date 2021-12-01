@@ -59,6 +59,7 @@ public class UserProfile extends AppCompatActivity {
     RecipeManager recipeManager;
     List<Recipe> recipeList;
     LinearLayout signed_in;
+    LinearLayout myRecipesList;
     Button sign_in;
     Button sign_out;
     int RC_SIGN_IN = 0;
@@ -97,6 +98,7 @@ public class UserProfile extends AppCompatActivity {
         recipeRecycle = findViewById(R.id.myRecipesRecycler);
         recipeList = new ArrayList<>();
 
+        myRecipesList = findViewById(R.id.myRecipesList);
         no_signed_in = findViewById(R.id.no_signed_in);
         signed_in = findViewById(R.id.signed_in);
 
@@ -144,6 +146,10 @@ public class UserProfile extends AppCompatActivity {
         recipeManager = new RecipeManager(this);
 
         recipeList = recipeManager.getFromAdded();
+        myRecipesList.setVisibility(View.GONE);
+        if (recipeList.size() > 0) {
+            myRecipesList.setVisibility(View.VISIBLE);
+        }
 
         recipeSingleAdapter = new RecipeSingleAdapter(this, recipeList);
         recipeRecycle.setAdapter(recipeSingleAdapter);
