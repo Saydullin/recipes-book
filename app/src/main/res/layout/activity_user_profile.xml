@@ -132,38 +132,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/myRecipesList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginVertical="15dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/my_recipes_text"
-                android:gravity="center"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myRecipesRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_marginTop="15dp"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                app:layout_constraintTop_toBottomOf="@+id/textViewResult" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/no_signed_in"
             android:visibility="gone"
             android:layout_width="wrap_content"
@@ -187,6 +155,36 @@
                 android:layout_gravity="center"
                 android:layout_marginVertical="15dp"
                 android:text="@string/sign_in_by_google" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/myRecipesList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/my_recipes_text"
+                android:gravity="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myRecipesRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/textViewResult" />
 
         </LinearLayout>
 

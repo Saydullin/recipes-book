@@ -201,27 +201,27 @@ public class MainActivity extends AppCompatActivity {
                                         document.getString("userEmail"),
                                         document.getString("userName")
                                 ));
-                                allRecipesList.add(new Recipe(
-                                        document.getString("description"),
-                                        document.getLong("duration"),
-                                        document.getLong("date"),
-                                        document.getString("id"),
-                                        document.getString("image"),
-                                        document.getString("ingredients"),
-                                        document.getString("tag"),
-                                        document.getString("title"),
-                                        document.getString("userEmail"),
-                                        document.getString("userName")
-                                ));
+//                                allRecipesList.add(new Recipe(
+//                                        document.getString("description"),
+//                                        document.getLong("duration"),
+//                                        document.getLong("date"),
+//                                        document.getString("id"),
+//                                        document.getString("image"),
+//                                        document.getString("ingredients"),
+//                                        document.getString("tag"),
+//                                        document.getString("title"),
+//                                        document.getString("userEmail"),
+//                                        document.getString("userName")
+//                                ));
                             }
                             setRecipeRecycle(getData, recyclerView);
-                            allRecipeManager.add(allRecipesList);
-                            Recipe resultRecipe = searchData.searchByTitle("Steak", allRecipesList);
-                            if (resultRecipe != null) {
-                                Log.d("SEARCH_RESULT", "Result: " + resultRecipe.getTitle());
-                            } else {
-                                Log.d("SEARCH_RESULT", "Result: null ");
-                            }
+//                            allRecipeManager.add(allRecipesList);
+//                            Recipe resultRecipe = searchData.searchByTitle("Steak", allRecipesList);
+//                            if (resultRecipe != null) {
+//                                Log.d("SEARCH_RESULT", "Result: " + resultRecipe.getTitle());
+//                            } else {
+//                                Log.d("SEARCH_RESULT", "Result: null ");
+//                            }
                         } else {
                             Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                         }

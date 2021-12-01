@@ -1,5 +1,4 @@
 package com.example.recipesbook.utils;
-
 import android.content.Context;
 
 public class Validator {

@@ -68,7 +68,7 @@
 
     <string name="server_client_id">192537204330-vedegos5oei85gmautfjk1sugboa7fkt.apps.googleusercontent.com</string>
     <string name="change_account">Change Account</string>
-    <string name="no_signed_in">You do not have signed in yet. Please sign in to see your recipes</string>
+    <string name="no_signed_in">You do not have signed in yet. Please sign in.</string>
     <string name="cook_later">Cook Later</string>
     <string name="choose_tag">Choose tag</string>
     <string name="fastfood_text">FastFood</string>

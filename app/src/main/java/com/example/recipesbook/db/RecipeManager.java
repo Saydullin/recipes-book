@@ -38,7 +38,6 @@ public class RecipeManager {
 
         try {
             database.insert(MyRecipes.TABLE_COOK_LATER_RECIPES, null, contentValues);
-            Toast.makeText(context, "Recipe added successfully", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(context, "Data NOT Saved: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -168,7 +167,7 @@ public class RecipeManager {
 
         try {
             database.delete(MyRecipes.TABLE_COOK_LATER_RECIPES, MyRecipes.KEY_DOC_KEY + "='" + docKey + "'", null);
-            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Recipe deleted from Cook Later list", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(context, "Not deleted", Toast.LENGTH_SHORT).show();
         }

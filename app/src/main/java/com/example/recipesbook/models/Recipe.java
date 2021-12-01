@@ -36,7 +36,6 @@ public class Recipe {
     }
 
     public long getDateLong() {
-        Log.d("DATEISDATE", date + "");
         return date;
     }
 

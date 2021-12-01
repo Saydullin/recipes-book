@@ -77,6 +77,7 @@ public class RecipeItem extends AppCompatActivity {
                     intentTag,
                     intentId
             );
+            Toast.makeText(this, "Recipe added to Cook Later list", Toast.LENGTH_SHORT).show();
             finish();
         });
 
