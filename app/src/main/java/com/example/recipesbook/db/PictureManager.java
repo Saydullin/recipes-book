@@ -38,12 +38,6 @@ public class PictureManager {
             StorageReference mountainsRef = storageReference.child("images/" + randomKey);
 
             mountainsRef.putFile(imageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(context, "Image upload", Toast.LENGTH_LONG).show();
-                        }
-                    })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {

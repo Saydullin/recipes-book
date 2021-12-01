@@ -13,7 +13,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,7 +24,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.recipesbook.adapters.RecipesAdapter;
+import com.example.recipesbook.db.AllRecipeManager;
 import com.example.recipesbook.models.Recipe;
+import com.example.recipesbook.utils.SearchData;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,14 +48,16 @@ public class MainActivity extends AppCompatActivity {
     RecipesAdapter recipesAdapter;
     Drawable profileImage;
     TextView textViewResult;
+    EditText searchRecipes;
     ImageButton cookLaterTab;
     ImageView button_login;
     ImageButton button_add_recipe;
-    Handler handlerSplash;
 
     List<Recipe> getData;
-
+    List<Recipe> allRecipesList;
     FirebaseFirestore db;
+    SearchData searchData;
+    AllRecipeManager allRecipeManager;
 
     @Override
     protected void onStart() {
@@ -64,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
             profileImage = ContextCompat.getDrawable(this, R.drawable.profile);
             button_login.setImageDrawable(profileImage);
         }
+
+//        updateAllRecipes();
     }
 
     @SuppressLint("SetTextI18n")
@@ -73,6 +82,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = FirebaseFirestore.getInstance();
+
+        searchRecipes = findViewById(R.id.searchRecipes);
+
+        searchRecipes.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() != 0)
+                    searchRecipes.setText("");
+            }
+        });
 
         button_login = findViewById(R.id.button_login);
         button_add_recipe = findViewById(R.id.button_add_recipe);
@@ -149,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
     private void getRecipesByTag(String tag, RecyclerView recyclerView) {
         db = FirebaseFirestore.getInstance();
         getData = new ArrayList<>();
+        allRecipesList = new ArrayList<>();
+        searchData = new SearchData(this);
+        allRecipeManager = new AllRecipeManager(this);
 
         db.collection("recipes").whereEqualTo("tag", tag.toLowerCase()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -159,8 +189,19 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             getData = new ArrayList<>();
                             for (DocumentSnapshot document : task.getResult()) {
-                                Log.d("SuccessQuery", tag + " => " + document.getString("tag"));
                                 getData.add(new Recipe(
+                                        document.getString("description"),
+                                        document.getLong("duration"),
+                                        document.getLong("date"),
+                                        document.getString("id"),
+                                        document.getString("image"),
+                                        document.getString("ingredients"),
+                                        document.getString("tag"),
+                                        document.getString("title"),
+                                        document.getString("userEmail"),
+                                        document.getString("userName")
+                                ));
+                                allRecipesList.add(new Recipe(
                                         document.getString("description"),
                                         document.getLong("duration"),
                                         document.getLong("date"),
@@ -174,6 +215,13 @@ public class MainActivity extends AppCompatActivity {
                                 ));
                             }
                             setRecipeRecycle(getData, recyclerView);
+                            allRecipeManager.add(allRecipesList);
+                            Recipe resultRecipe = searchData.searchByTitle("Steak", allRecipesList);
+                            if (resultRecipe != null) {
+                                Log.d("SEARCH_RESULT", "Result: " + resultRecipe.getTitle());
+                            } else {
+                                Log.d("SEARCH_RESULT", "Result: null ");
+                            }
                         } else {
                             Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                         }

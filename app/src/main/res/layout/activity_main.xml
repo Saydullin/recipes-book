@@ -58,7 +58,7 @@
             <!--                app:layout_constraintEnd_toStartOf="@+id/editText2" />-->
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/searchRecipes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autofillHints="default"

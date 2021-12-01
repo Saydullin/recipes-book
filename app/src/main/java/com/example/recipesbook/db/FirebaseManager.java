@@ -47,7 +47,7 @@ public class FirebaseManager {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Data successfully added", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)

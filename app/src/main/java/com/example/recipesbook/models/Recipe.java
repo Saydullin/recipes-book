@@ -1,5 +1,7 @@
 package com.example.recipesbook.models;
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -31,6 +33,11 @@ public class Recipe {
         this.userName = userName;
         this.ingredients = ingredients;
         this.description = description;
+    }
+
+    public long getDateLong() {
+        Log.d("DATEISDATE", date + "");
+        return date;
     }
 
     public String getDate() {
@@ -97,6 +104,10 @@ public class Recipe {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public long getLongDuration() {
+        return duration;
     }
 
     public String getDuration() {

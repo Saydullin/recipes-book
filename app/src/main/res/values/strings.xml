@@ -83,6 +83,7 @@
     <string name="save">Save</string>
     <string name="delete_text">Delete</string>
     <string name="editing_text">[Editing]</string>
+    <string name="cook_later_text">[Cook Later]</string>
 
     <string-array name="recipes_array" color="#838383">
         <item color="#838383">Soups</item>

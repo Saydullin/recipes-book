@@ -57,7 +57,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         Glide.with(context)
                 .load(picturePath)
                 .into(holder.recipeImage);
-        holder.recipeDuration.setText(recipes.get(position).getDuration().trim() + " of cooking");
+        holder.recipeDuration.setText(recipes.get(position).getDuration().trim());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RecipeItem.class);
@@ -65,10 +65,13 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
             intent.putExtra("recipeImage", picturePath);
             intent.putExtra("recipeAuthor", recipes.get(position).getUserName());
             intent.putExtra("recipeDate", recipes.get(position).getDate());
+            intent.putExtra("recipeDateLong", String.valueOf(recipes.get(position).getDateLong()));
             intent.putExtra("recipeTitle", recipes.get(position).getTitle());
-            intent.putExtra("recipeDuration", recipes.get(position).getDuration());
+            intent.putExtra("recipeDuration", String.valueOf(recipes.get(position).getLongDuration()));
             intent.putExtra("recipeDescription", recipes.get(position).getDescription());
             intent.putExtra("recipeIngredients", recipes.get(position).getIngredients());
+            intent.putExtra("recipeTag", recipes.get(position).getTag());
+            intent.putExtra("recipeId", recipes.get(position).getId());
 
             context.startActivity(intent);
         });

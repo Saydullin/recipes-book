@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipesBook">
         <activity
+            android:name=".RecipeItemLater"
+            android:exported="true" />
+        <activity
             android:name=".RecipeItemFull"
             android:exported="true" />
         <activity

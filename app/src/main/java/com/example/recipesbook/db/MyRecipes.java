@@ -10,7 +10,7 @@ public class MyRecipes extends SQLiteOpenHelper {
 
     Context context;
 
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 9;
     public static final String DATABASE_NAME = "MyRecipesDB";
     public static final String TABLE_ADDED_RECIPES = "recipes";
     public static final String TABLE_COOK_LATER_RECIPES = "cook_later";
@@ -58,7 +58,8 @@ public class MyRecipes extends SQLiteOpenHelper {
                 KEY_DESCRIPTION + " TEXT," +
                 KEY_INGREDIENTS + " TEXT," +
                 KEY_DATE + " LONG," +
-                KEY_TAG + " TEXT" +
+                KEY_TAG + " TEXT," +
+                KEY_DOC_KEY + " TEXT" +
                 ")");
     }
 

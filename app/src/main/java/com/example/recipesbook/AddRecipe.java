@@ -145,7 +145,6 @@ public class AddRecipe extends AppCompatActivity {
                     if (res.get("ok") == "true") {
                         recipeManager = new RecipeManager(this);
                         long durationRecipe = Long.parseLong(recipeDuration.getText().toString());
-                        Toast.makeText(this, "Added: " + docKey, Toast.LENGTH_SHORT).show();
                         recipeManager.addToAdded(
                                 durationRecipe,
                                 timestamp,

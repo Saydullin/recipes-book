@@ -11,7 +11,7 @@ public class CookLater extends SQLiteOpenHelper {
 
     Context context;
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "CookLaterDB";
     public static final String TABLE_RECIPES = "recipes";
 

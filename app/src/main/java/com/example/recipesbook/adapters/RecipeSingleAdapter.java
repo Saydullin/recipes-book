@@ -49,7 +49,6 @@ public class RecipeSingleAdapter extends RecyclerView.Adapter<RecipeSingleAdapte
 
         holder.recipeTitle.setText(recipes.get(position).getTitle());
         holder.recipeDate.setText(recipes.get(position).getDate());
-        Toast.makeText(context, "picturePath: " + recipes.get(position).getImage(), Toast.LENGTH_LONG).show();
         Glide.with(context)
                 .load(picturePath)
                 .into(holder.recipeImageFull);

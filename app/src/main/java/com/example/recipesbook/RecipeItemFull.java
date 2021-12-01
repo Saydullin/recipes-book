@@ -47,7 +47,6 @@ public class RecipeItemFull extends AppCompatActivity {
         String intentDescription = getIntent().getStringExtra("recipeDescription");
         String intentIngredients = getIntent().getStringExtra("recipeIngredients");
         String docKey = getIntent().getStringExtra("docKey");
-        Toast.makeText(this, "Got: " + docKey, Toast.LENGTH_SHORT).show();
 
         Glide.with(this)
                 .load(intentImage)
@@ -61,7 +60,6 @@ public class RecipeItemFull extends AppCompatActivity {
         cancelButton.setOnClickListener(v -> finish());
 
         deleteButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Must deleted", Toast.LENGTH_SHORT).show();
             db = FirebaseFirestore.getInstance();
 
             DocumentReference noteRef = db.collection("recipes").document(docKey);
@@ -73,21 +71,6 @@ public class RecipeItemFull extends AppCompatActivity {
             recipeManager.deleteAdded(docKey);
 
             finish();
-
-//            db.collection("recipes").document(docKey)
-//                    .delete()
-//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            Log.d("ErrorSuccess", "DocumentSnapshot successfully deleted!");
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Log.w("ErrorFailure", "Error deleting document", e);
-//                        }
-//                    });
         });
 
     }
