@@ -208,8 +208,6 @@ public class UserProfile extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-//            Intent intent = new Intent(this, MainActivity.class);
-//            startActivity(intent);
             finish();
 
             SharedPreferences.Editor editor = getSharedPreferences(USER_DATA_PREFS, MODE_PRIVATE).edit();

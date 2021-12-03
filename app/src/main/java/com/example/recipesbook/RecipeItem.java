@@ -55,7 +55,6 @@ public class RecipeItem extends AppCompatActivity {
         recipeTitle.setText(intentTitle);
         recipeAuthor.setText(intentAuthor);
         recipeDuration.setText(String.valueOf(intentDuration));
-        recipeDuration.setText("Hello");
         recipeDescription.setText(intentDescription);
         recipeIngredients.setText(intentIngredients);
 
@@ -63,7 +62,6 @@ public class RecipeItem extends AppCompatActivity {
 
         cookLaterButton.setOnClickListener(v -> {
             recipeManager = new RecipeManager(this);
-//            long durationLong = Long.parseLong(intentDuration);
             long dateLong = Long.parseLong(intentDateLong);
             long durationLong = 452362920;
 

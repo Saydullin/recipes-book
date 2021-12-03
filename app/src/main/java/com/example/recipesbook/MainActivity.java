@@ -44,6 +44,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    final static int RECIPES_LIMIT = 3;
+
     RecyclerView recipeRecycle;
     RecipesAdapter recipesAdapter;
     Drawable profileImage;
@@ -180,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         searchData = new SearchData(this);
         allRecipeManager = new AllRecipeManager(this);
 
-        db.collection("recipes").whereEqualTo("tag", tag.toLowerCase()).get()
+        db.collection("recipes").whereEqualTo("tag", tag.toLowerCase()).limit(RECIPES_LIMIT).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @SuppressLint("SetTextI18n")
                     @Override
@@ -213,6 +215,20 @@ public class MainActivity extends AppCompatActivity {
 //                                        document.getString("userEmail"),
 //                                        document.getString("userName")
 //                                ));
+                            }
+                            if (getData.size() == RECIPES_LIMIT) {
+                                getData.add(new Recipe(
+                                        "",
+                                        -1,
+                                        -1,
+                                        "RECIPES_LIMIT",
+                                        "see-more-recipes.png",
+                                        "",
+                                        "more",
+                                        "See more",
+                                        "",
+                                        tag
+                                ));
                             }
                             setRecipeRecycle(getData, recyclerView);
 //                            allRecipeManager.add(allRecipesList);

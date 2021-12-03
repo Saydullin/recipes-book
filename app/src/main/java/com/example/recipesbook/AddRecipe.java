@@ -96,6 +96,8 @@ public class AddRecipe extends AppCompatActivity {
         });
 
         submit_add_recipe.setOnClickListener(v -> {
+            submit_add_recipe.setEnabled(false);
+            submit_add_recipe.setText(R.string.loading);
             RecipeManager recipeManager = new RecipeManager(this);
             Validator validate = new Validator(this);
 
@@ -107,63 +109,60 @@ public class AddRecipe extends AppCompatActivity {
                 int validateDuration = Integer.parseInt(recipeDuration.getText().toString());
 
                 // Validate received data from user
-                validate.checkString("image", validateImage, new int[] {5, -1});
-                validate.checkString("title", validateTitle, new int[] {3, 35});
-                validate.checkInt("duration", validateDuration, new int[] {5, 1440});
-                validate.checkString("ingredients", validateIngredients, new int[] {3, 300});
-                validate.checkString("description", validateDescription, new int[] {10, 2000});
+//                validate.checkString("image", validateImage, new int[] {5, -1});
+//                validate.checkString("title", validateTitle, new int[] {3, 35});
+//                validate.checkInt("duration", validateDuration, new int[] {5, 1440});
+//                validate.checkString("ingredients", validateIngredients, new int[] {3, 300});
+//                validate.checkString("description", validateDescription, new int[] {10, 2000});
 
                 PictureManager pictureManager = new PictureManager(this);
                 String imageName = pictureManager.addPicture(imageUri, null);
 
-                if (!imageName.equals("")) {
-                    long timestamp = System.currentTimeMillis();
-                    String chosenTag = recipesSpinner.getSelectedItem().toString();
-                    SharedPreferences prefs = getSharedPreferences("userData", MODE_PRIVATE);
-                    String userEmail = prefs.getString("email", "No email");
-                    String userName = prefs.getString("name", "No name");
-                    String randomKey = UUID.randomUUID().toString();
-                    String docKey = UUID.randomUUID().toString();
-
-                    // Add data to databases
-                    Map<String, Object> recipe = new HashMap<>();
-                    recipe.put("userEmail", userEmail);
-                    recipe.put("date", timestamp);
-                    recipe.put("userName", userName);
-                    recipe.put("title", validateTitle);
-                    recipe.put("image", imageName);
-                    recipe.put("duration", validateDuration);
-                    recipe.put("id", randomKey);
-                    recipe.put("ingredients", validateIngredients);
-                    recipe.put("description", validateDescription);
-                    recipe.put("tag", chosenTag.toLowerCase());
-
-                    FirebaseManager firebaseManager = new FirebaseManager(this);
-
-                    Map<String, Object> res = firebaseManager.add(recipe, "recipes", docKey);
-
-                    if (res.get("ok") == "true") {
-                        recipeManager = new RecipeManager(this);
-                        long durationRecipe = Long.parseLong(recipeDuration.getText().toString());
-                        recipeManager.addToAdded(
-                                durationRecipe,
-                                timestamp,
-                                imageName,
-                                validateTitle,
-                                validateIngredients,
-                                validateDescription,
-                                chosenTag.toLowerCase(),
-                                docKey
-                        );
-                    } else {
-                        Toast.makeText(AddRecipe.this, "Adding Failed", Toast.LENGTH_SHORT).show();
-                    }
-
-//                    firebaseManager.get("soups");
-                } else {
-                    Toast.makeText(this, "You did not added image!", Toast.LENGTH_SHORT).show();
+                if (imageName.equals("")) {
+                    imageName = "no-recipe-image.png";
                 }
-//                recipeManager.add(imageURI, validateTitle, validateIngredientsAmount, validateDuration, validateDescription, "salads");
+                long timestamp = System.currentTimeMillis();
+                String chosenTag = recipesSpinner.getSelectedItem().toString();
+                SharedPreferences prefs = getSharedPreferences("userData", MODE_PRIVATE);
+                String userEmail = prefs.getString("email", "No email");
+                String userName = prefs.getString("name", "No name");
+                String randomKey = UUID.randomUUID().toString();
+                String docKey = UUID.randomUUID().toString();
+
+                // Add data to databases
+                Map<String, Object> recipe = new HashMap<>();
+                recipe.put("userEmail", userEmail);
+                recipe.put("date", timestamp);
+                recipe.put("userName", userName);
+                recipe.put("title", validateTitle);
+                recipe.put("image", imageName);
+                recipe.put("duration", validateDuration);
+                recipe.put("id", randomKey);
+                recipe.put("ingredients", validateIngredients);
+                recipe.put("description", validateDescription);
+                recipe.put("tag", chosenTag.toLowerCase());
+
+                FirebaseManager firebaseManager = new FirebaseManager(this);
+
+                Map<String, Object> res = firebaseManager.add(recipe, "recipes", docKey);
+
+                if (res.get("ok") == "true") {
+                    recipeManager = new RecipeManager(this);
+                    long durationRecipe = Long.parseLong(recipeDuration.getText().toString());
+                    recipeManager.addToAdded(
+                            durationRecipe,
+                            timestamp,
+                            imageName,
+                            validateTitle,
+                            validateIngredients,
+                            validateDescription,
+                            chosenTag.toLowerCase(),
+                            docKey
+                    );
+                    finish();
+                } else {
+                    Toast.makeText(AddRecipe.this, "Adding Failed", Toast.LENGTH_SHORT).show();
+                }
             } catch(NumberFormatException e) {
                 Toast.makeText(this, "Fill all the fields!", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
