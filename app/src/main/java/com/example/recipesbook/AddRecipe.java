@@ -99,7 +99,7 @@ public class AddRecipe extends AppCompatActivity {
             submit_add_recipe.setEnabled(false);
             submit_add_recipe.setText(R.string.loading);
             RecipeManager recipeManager = new RecipeManager(this);
-            Validator validate = new Validator(this);
+//            Validator validate = new Validator(this);
 
             try {
                 String validateImage = recipeImagePreview.getResources().toString();

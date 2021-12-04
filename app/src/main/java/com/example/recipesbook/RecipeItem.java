@@ -13,6 +13,10 @@ import com.bumptech.glide.Glide;
 import com.example.recipesbook.db.CookLaterManager;
 import com.example.recipesbook.db.RecipeManager;
 
+/**
+ * This is recipe view item
+ */
+
 public class RecipeItem extends AppCompatActivity {
 
     ImageView imageFullPreview;

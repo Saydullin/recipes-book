@@ -42,6 +42,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is MainActivity class, which is main class
+ * @author saydu
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     final static int RECIPES_LIMIT = 3;

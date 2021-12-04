@@ -1,6 +1,5 @@
 package com.example.recipesbook.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -18,9 +17,14 @@ import com.example.recipesbook.R;
 import com.example.recipesbook.RecipeItem;
 import com.example.recipesbook.db.PictureManager;
 import com.example.recipesbook.models.Recipe;
-
 import java.util.List;
 
+/**
+ * The RecipesAdapter for the Application
+ * @author Saydullin
+ * @version 1.1
+ * This is not the first Screen of the user
+ */
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder> {
 
     Context context;
@@ -40,9 +44,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         return new RecipesViewHolder(RecipesItem);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull RecipesViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull RecipesViewHolder holder, int position) {
 
         String picturePath = "https://firebasestorage.googleapis.com/v0/b/recipes-book-1637352602907.appspot.com/o/images%2F" + recipes.get(position).getImage() + "?alt=media&token=4130be0a-d3ea-419e-b388-f25d07499f22";
 
@@ -53,7 +56,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
                 .into(holder.recipeImage);
 
         if (recipes.get(position).getId().equals("RECIPES_LIMIT")) {
-            holder.recipeAuthor.setText("Category " + recipes.get(position).getUserName());
+            String authorText = "Category " + recipes.get(position).getUserName();
+            holder.recipeAuthor.setText(authorText);
             holder.itemView.setOnClickListener(v -> {
                 Toast.makeText(context, "See more", Toast.LENGTH_SHORT).show();
             });
@@ -61,8 +65,9 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
             intent.putExtra("tag", recipes.get(position).getUserName());
             context.startActivity(intent);
         } else {
+            String authorText = "By " + recipes.get(position).getUserName();
             holder.recipeDuration.setText(recipes.get(position).getDuration().trim());
-            holder.recipeAuthor.setText("By " + recipes.get(position).getUserName());
+            holder.recipeAuthor.setText(authorText);
 
             holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(context, RecipeItem.class);
