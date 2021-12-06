@@ -77,7 +77,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
                 intent.putExtra("recipeDate", recipes.get(position).getDate());
                 intent.putExtra("recipeDateLong", String.valueOf(recipes.get(position).getDateLong()));
                 intent.putExtra("recipeTitle", recipes.get(position).getTitle());
-                intent.putExtra("recipeDuration", String.valueOf(recipes.get(position).getLongDuration()));
+                intent.putExtra("recipeDurationLog", String.valueOf(recipes.get(position).getLongDuration()));
+                intent.putExtra("recipeDuration", String.valueOf(recipes.get(position).getDuration()));
                 intent.putExtra("recipeDescription", recipes.get(position).getDescription());
                 intent.putExtra("recipeIngredients", recipes.get(position).getIngredients());
                 intent.putExtra("recipeTag", recipes.get(position).getTag());

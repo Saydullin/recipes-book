@@ -24,7 +24,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.recipesbook.adapters.RecipesAdapter;
-import com.example.recipesbook.db.AllRecipeManager;
+//import com.example.recipesbook.db.AllRecipeManager;
+import com.example.recipesbook.db.GetData;
 import com.example.recipesbook.models.Recipe;
 import com.example.recipesbook.utils.SearchData;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     List<Recipe> allRecipesList;
     FirebaseFirestore db;
     SearchData searchData;
-    AllRecipeManager allRecipeManager;
+//    AllRecipeManager allRecipeManager;
 
     @Override
     protected void onStart() {
@@ -91,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         searchRecipes = findViewById(R.id.searchRecipes);
+
+        GetData lol = new GetData(this);
+        lol.all();
 
         searchRecipes.addTextChangedListener(new TextWatcher() {
 
@@ -185,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         getData = new ArrayList<>();
         allRecipesList = new ArrayList<>();
         searchData = new SearchData(this);
-        allRecipeManager = new AllRecipeManager(this);
+//        allRecipeManager = new AllRecipeManager(this);
 
         db.collection("recipes").whereEqualTo("tag", tag.toLowerCase()).limit(RECIPES_LIMIT).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -230,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                                         "see-more-recipes.png",
                                         "",
                                         "more",
-                                        "See more",
+                                        "More " + tag,
                                         "",
                                         tag
                                 ));

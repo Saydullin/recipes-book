@@ -46,6 +46,7 @@ public class RecipeItem extends AppCompatActivity {
         String intentDate = getIntent().getStringExtra("recipeDate");
         String intentDateLong = getIntent().getStringExtra("recipeDateLong");
         String intentAuthor = "By " + getIntent().getStringExtra("recipeAuthor");
+        String intentDurationLong = getIntent().getStringExtra("recipeDurationLong");
         String intentDuration = getIntent().getStringExtra("recipeDuration");
         String intentDescription = getIntent().getStringExtra("recipeDescription");
         String intentIngredients = getIntent().getStringExtra("recipeIngredients");
@@ -58,7 +59,7 @@ public class RecipeItem extends AppCompatActivity {
         recipeDate.setText("Published on " + intentDate);
         recipeTitle.setText(intentTitle);
         recipeAuthor.setText(intentAuthor);
-        recipeDuration.setText(String.valueOf(intentDuration));
+        recipeDuration.setText(intentDuration);
         recipeDescription.setText(intentDescription);
         recipeIngredients.setText(intentIngredients);
 

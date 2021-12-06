@@ -152,6 +152,70 @@ public class RecipeManager {
         return recipeList;
     }
 
+    public void addToAll(List<Recipe> data) {
+        AllRecipes allRecipes = new AllRecipes(context);
+
+        SQLiteDatabase database = allRecipes.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        for (int i = 0; i < data.size(); i++) {
+            contentValues.put(AllRecipes.KEY_IMAGE, data.get(i).getImage());
+            contentValues.put(AllRecipes.KEY_TITLE, data.get(i).getTitle());
+            contentValues.put(AllRecipes.KEY_DURATION, data.get(i).getDuration());
+            contentValues.put(AllRecipes.KEY_DATE, data.get(i).getDate());
+            contentValues.put(AllRecipes.KEY_DESCRIPTION, data.get(i).getDescription());
+            contentValues.put(AllRecipes.KEY_INGREDIENTS, data.get(i).getIngredients());
+            contentValues.put(AllRecipes.KEY_TAG, data.get(i).getTag());
+            contentValues.put(AllRecipes.KEY_USER_NAME, data.get(i).getUserName());
+            contentValues.put(AllRecipes.KEY_USER_EMAIL, data.get(i).getUserEmail());
+
+            database.insert(AllRecipes.TABLE_ALL_RECIPES, null, contentValues);
+        }
+
+    }
+
+    public List<Recipe> getFromAll() {
+        AllRecipes allRecipes = new AllRecipes(context);
+        Cursor cursor;
+        List<Recipe> recipeList = new ArrayList<>();
+
+        SQLiteDatabase database = allRecipes.getWritableDatabase();
+
+        cursor = database.query(AllRecipes.TABLE_ALL_RECIPES, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(AllRecipes.KEY_ID);
+            int imageIndex = cursor.getColumnIndex(AllRecipes.KEY_IMAGE);
+            int titleIndex = cursor.getColumnIndex(AllRecipes.KEY_TITLE);
+            int dateIndex = cursor.getColumnIndex(AllRecipes.KEY_DATE);
+            int tagIndex = cursor.getColumnIndex(AllRecipes.KEY_TAG);
+            int descriptionIndex = cursor.getColumnIndex(AllRecipes.KEY_DESCRIPTION);
+            int durationIndex = cursor.getColumnIndex(AllRecipes.KEY_DURATION);
+            int ingredients = cursor.getColumnIndex(AllRecipes.KEY_INGREDIENTS);
+            int userName = cursor.getColumnIndex(AllRecipes.KEY_USER_NAME);
+            int userEmail = cursor.getColumnIndex(AllRecipes.KEY_USER_EMAIL);
+
+            do {
+                recipeList.add(new Recipe(
+                        cursor.getString(descriptionIndex),
+                        cursor.getLong(durationIndex),
+                        cursor.getLong(dateIndex),
+                        cursor.getString(idIndex),
+                        cursor.getString(imageIndex),
+                        cursor.getString(ingredients),
+                        cursor.getString(tagIndex),
+                        cursor.getString(titleIndex),
+                        cursor.getString(userEmail),
+                        cursor.getString(userName)));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return recipeList;
+    }
+
     public void deleteAdded(String docKey) {
         myRecipes = new MyRecipes(context);
 

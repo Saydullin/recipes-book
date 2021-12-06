@@ -10,7 +10,7 @@ public class AllRecipes extends SQLiteOpenHelper {
 
     Context context;
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "AllRecipesDB";
     public static final String TABLE_ALL_RECIPES = "all_recipes";
 
@@ -22,7 +22,8 @@ public class AllRecipes extends SQLiteOpenHelper {
     public static final String KEY_INGREDIENTS = "ingredients";
     public static final String KEY_DATE = "date";
     public static final String KEY_TAG = "tag";
-    public static final String KEY_DOC_KEY = "doc";
+    public static final String KEY_USER_NAME = "user_name";
+    public static final String KEY_USER_EMAIL = "user_email";
 
     public AllRecipes(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,7 +41,8 @@ public class AllRecipes extends SQLiteOpenHelper {
                 KEY_INGREDIENTS + " TEXT," +
                 KEY_DATE + " LONG," +
                 KEY_TAG + " TEXT," +
-                KEY_DOC_KEY + " TEXT" +
+                KEY_USER_NAME + " TEXT," +
+                KEY_USER_EMAIL + " TEXT" +
                 ")");
     }
 

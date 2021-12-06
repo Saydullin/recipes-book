@@ -13,7 +13,7 @@ public class DbRecipe extends SQLiteOpenHelper {
 
     Context context;
 
-    public static final int DATABASE_VERSION = 16;
+    public static final int DATABASE_VERSION = 17;
     public static final String DATABASE_NAME = "RecipesDB";
     public static final String TABLE_RECIPES = "recipes";
 
