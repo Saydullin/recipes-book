@@ -11,28 +11,19 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Scroller;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.recipesbook.db.DbRecipe;
 import com.example.recipesbook.db.FirebaseManager;
 import com.example.recipesbook.db.PictureManager;
 import com.example.recipesbook.db.RecipeManager;
-import com.example.recipesbook.utils.Validator;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -99,21 +90,12 @@ public class AddRecipe extends AppCompatActivity {
             submit_add_recipe.setEnabled(false);
             submit_add_recipe.setText(R.string.loading);
             RecipeManager recipeManager = new RecipeManager(this);
-//            Validator validate = new Validator(this);
 
             try {
-                String validateImage = recipeImagePreview.getResources().toString();
                 String validateTitle = recipeTitle.getText().toString().trim();
                 String validateIngredients = recipeIngredients.getText().toString().trim();
                 String validateDescription= recipeDescription.getText().toString().trim();
                 int validateDuration = Integer.parseInt(recipeDuration.getText().toString());
-
-                // Validate received data from user
-//                validate.checkString("image", validateImage, new int[] {5, -1});
-//                validate.checkString("title", validateTitle, new int[] {3, 35});
-//                validate.checkInt("duration", validateDuration, new int[] {5, 1440});
-//                validate.checkString("ingredients", validateIngredients, new int[] {3, 300});
-//                validate.checkString("description", validateDescription, new int[] {10, 2000});
 
                 PictureManager pictureManager = new PictureManager(this);
                 String imageName = pictureManager.addPicture(imageUri, null);

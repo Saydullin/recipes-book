@@ -3,7 +3,6 @@ package com.example.recipesbook;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 public class RecipeSingleItem extends AppCompatActivity {
 

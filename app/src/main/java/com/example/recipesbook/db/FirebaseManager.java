@@ -11,7 +11,6 @@ import androidx.annotation.RequiresApi;
 import com.example.recipesbook.models.Recipe;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -62,30 +61,6 @@ public class FirebaseManager {
 
         return result;
     }
-
-//    public Map<String, Object> add(Map<String, Object> data, String collectionPath, String docKey) {
-//
-//        db = FirebaseFirestore.getInstance();
-//        db.collection(collectionPath)
-//                .add(data)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(@NonNull DocumentReference documentReference) {
-//                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @RequiresApi(api = Build.VERSION_CODES.N)
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-//                errorMessage = e.getMessage();
-//                result.replace("ok", "false");
-//                result.replace("description", e.getMessage());
-//            }
-//        });
-//
-//        return result;
-//    }
 
     public List<Recipe> get(String tag) {
 

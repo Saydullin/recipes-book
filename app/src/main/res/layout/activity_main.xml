@@ -130,7 +130,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/linearLayoutContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -138,6 +138,8 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <LinearLayout
+                android:id="@+id/recipeSoupRecyclerHeader"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -174,8 +176,10 @@
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout
+                android:id="@+id/recipeDessertsRecyclerHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:gravity="center_vertical"
@@ -210,9 +214,11 @@
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout
+                android:id="@+id/recipeSaladsRecyclerHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:visibility="gone"
                 android:layout_marginStart="15dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -246,8 +252,10 @@
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout
+                android:id="@+id/recipeFastFoodRecyclerHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:gravity="center_vertical"
@@ -282,9 +290,11 @@
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout
+                android:id="@+id/recipeSaucesRecyclerHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:visibility="gone"
                 android:layout_marginStart="15dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -318,8 +328,10 @@
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout
+                android:id="@+id/recipeDietaryRecyclerHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:gravity="center_vertical"
@@ -354,8 +366,10 @@
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout
+                android:id="@+id/recipeSeafoodRecyclerHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:gravity="center_vertical"
@@ -390,9 +404,11 @@
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout
+                android:id="@+id/recipeDrinksRecyclerHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:visibility="gone"
                 android:layout_marginStart="15dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -426,10 +442,12 @@
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout
+                android:id="@+id/recipeAuthorsRecyclerHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
+                android:visibility="gone"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -462,8 +480,10 @@
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout
+                android:id="@+id/recipeOtherRecyclerHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:gravity="center_vertical"

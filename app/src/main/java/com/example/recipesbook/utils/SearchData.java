@@ -23,5 +23,4 @@ public class SearchData {
         return null;
     }
 
-
 }

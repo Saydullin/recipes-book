@@ -12,10 +12,11 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,7 +25,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.recipesbook.adapters.RecipesAdapter;
-//import com.example.recipesbook.db.AllRecipeManager;
 import com.example.recipesbook.db.GetData;
 import com.example.recipesbook.models.Recipe;
 import com.example.recipesbook.utils.SearchData;
@@ -37,7 +37,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
     final static int RECIPES_LIMIT = 3;
 
-    RecyclerView recipeRecycle;
     RecipesAdapter recipesAdapter;
     Drawable profileImage;
     TextView textViewResult;
@@ -60,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
     ImageButton cookLaterTab;
     ImageView button_login;
     ImageButton button_add_recipe;
+    ViewGroup recyclersContainer;
 
     List<Recipe> getData;
     List<Recipe> allRecipesList;
     FirebaseFirestore db;
     SearchData searchData;
-//    AllRecipeManager allRecipeManager;
 
     @Override
     protected void onStart() {
@@ -79,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
             profileImage = ContextCompat.getDrawable(this, R.drawable.profile);
             button_login.setImageDrawable(profileImage);
         }
-
-//        updateAllRecipes();
     }
 
     @SuppressLint("SetTextI18n")
@@ -92,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         searchRecipes = findViewById(R.id.searchRecipes);
+        recyclersContainer = (ViewGroup) findViewById(R.id.linearLayoutContainer);
 
         GetData lol = new GetData(this);
         lol.all();
@@ -99,17 +96,19 @@ public class MainActivity extends AppCompatActivity {
         searchRecipes.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+                if (s.toString().split(" ").length > 1) {
+                    Toast.makeText(MainActivity.this, s.toString().split(" ")[0] + " | " + s.toString().split(" ")[1], Toast.LENGTH_SHORT).show();
+                }
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() != 0)
-                    searchRecipes.setText("");
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
         });
 
         button_login = findViewById(R.id.button_login);
@@ -138,16 +137,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateAllRecipes() {
-        getRecipesByTag("soups", findViewById(R.id.recipeSoupRecycler));
-        getRecipesByTag("desserts", findViewById(R.id.recipeDessertsRecycler));
-        getRecipesByTag("salads", findViewById(R.id.recipeSaladsRecycler));
-        getRecipesByTag("fastFood", findViewById(R.id.recipeFastFoodRecycler));
-        getRecipesByTag("seafood", findViewById(R.id.recipeSeafoodRecycler));
-        getRecipesByTag("drinks", findViewById(R.id.recipeDrinksRecycler));
-        getRecipesByTag("authors", findViewById(R.id.recipeAuthorsRecycler));
-        getRecipesByTag("other", findViewById(R.id.recipeOtherRecycler));
-        getRecipesByTag("dietary", findViewById(R.id.recipeDietaryRecycler));
-        getRecipesByTag("sauces", findViewById(R.id.recipeSaucesRecycler));
+        getRecipesByTag("soups", findViewById(R.id.recipeSoupRecycler), "");
+        getRecipesByTag("desserts", findViewById(R.id.recipeDessertsRecycler), "");
+        getRecipesByTag("salads", findViewById(R.id.recipeSaladsRecycler), "");
+        getRecipesByTag("fastFood", findViewById(R.id.recipeFastFoodRecycler), "");
+        getRecipesByTag("seafood", findViewById(R.id.recipeSeafoodRecycler), "");
+        getRecipesByTag("drinks", findViewById(R.id.recipeDrinksRecycler), "");
+        getRecipesByTag("authors", findViewById(R.id.recipeAuthorsRecycler), "");
+        getRecipesByTag("other", findViewById(R.id.recipeOtherRecycler), "");
+        getRecipesByTag("dietary", findViewById(R.id.recipeDietaryRecycler), "");
+        getRecipesByTag("sauces", findViewById(R.id.recipeSaucesRecycler), "");
     }
 
     private void eventChangeListener() {
@@ -175,83 +174,115 @@ public class MainActivity extends AppCompatActivity {
 
     private void setRecipeRecycle(List<Recipe> recipeList, RecyclerView recyclerView) {
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        recipeRecycle = recyclerView;
-        recipeRecycle.setLayoutManager(layoutManager);
+        View prevView = recyclersContainer.getChildAt(recyclersContainer.indexOfChild(recyclerView) - 1);
 
-        recipesAdapter = new RecipesAdapter(this, recipeList);
-        recipeRecycle.setAdapter(recipesAdapter);
+        if (recipeList.size() > 0) {
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+            recyclerView.setLayoutManager(layoutManager);
+
+            recipesAdapter = new RecipesAdapter(this, recipeList);
+            recyclerView.setAdapter(recipesAdapter);
+            prevView.setVisibility(View.VISIBLE);
+        } else {
+            prevView.setVisibility(View.GONE);
+        }
 
     }
 
-    private void getRecipesByTag(String tag, RecyclerView recyclerView) {
+    private void getRecipesByTag(String tag, RecyclerView recyclerView, String searchText) {
         db = FirebaseFirestore.getInstance();
         getData = new ArrayList<>();
         allRecipesList = new ArrayList<>();
         searchData = new SearchData(this);
-//        allRecipeManager = new AllRecipeManager(this);
 
-        db.collection("recipes").whereEqualTo("tag", tag.toLowerCase()).limit(RECIPES_LIMIT).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+        if (searchText != null && !searchText.equals("")) {
+            db.collection("recipes").whereLessThanOrEqualTo("title", searchText).limit(RECIPES_LIMIT).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                        if (task.isSuccessful()) {
-                            getData = new ArrayList<>();
-                            for (DocumentSnapshot document : task.getResult()) {
-                                getData.add(new Recipe(
-                                        document.getString("description"),
-                                        document.getLong("duration"),
-                                        document.getLong("date"),
-                                        document.getString("id"),
-                                        document.getString("image"),
-                                        document.getString("ingredients"),
-                                        document.getString("tag"),
-                                        document.getString("title"),
-                                        document.getString("userEmail"),
-                                        document.getString("userName")
-                                ));
-//                                allRecipesList.add(new Recipe(
-//                                        document.getString("description"),
-//                                        document.getLong("duration"),
-//                                        document.getLong("date"),
-//                                        document.getString("id"),
-//                                        document.getString("image"),
-//                                        document.getString("ingredients"),
-//                                        document.getString("tag"),
-//                                        document.getString("title"),
-//                                        document.getString("userEmail"),
-//                                        document.getString("userName")
-//                                ));
+                            if (task.isSuccessful()) {
+                                getData = new ArrayList<>();
+                                for (DocumentSnapshot document : task.getResult()) {
+                                    getData.add(new Recipe(
+                                            document.getString("description"),
+                                            document.getLong("duration"),
+                                            document.getLong("date"),
+                                            document.getString("id"),
+                                            document.getString("image"),
+                                            document.getString("ingredients"),
+                                            document.getString("tag"),
+                                            document.getString("title"),
+                                            document.getString("userEmail"),
+                                            document.getString("userName")
+                                    ));
+                                }
+                                if (getData.size() == RECIPES_LIMIT) {
+                                    getData.add(new Recipe(
+                                            "",
+                                            -1,
+                                            -1,
+                                            "RECIPES_LIMIT",
+                                            "see-more-recipes.png",
+                                            "",
+                                            "more",
+                                            "More " + tag,
+                                            "",
+                                            tag
+                                    ));
+                                }
+                                setRecipeRecycle(getData, recyclerView);
+                            } else {
+                                Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                             }
-                            if (getData.size() == RECIPES_LIMIT) {
-                                getData.add(new Recipe(
-                                        "",
-                                        -1,
-                                        -1,
-                                        "RECIPES_LIMIT",
-                                        "see-more-recipes.png",
-                                        "",
-                                        "more",
-                                        "More " + tag,
-                                        "",
-                                        tag
-                                ));
-                            }
-                            setRecipeRecycle(getData, recyclerView);
-//                            allRecipeManager.add(allRecipesList);
-//                            Recipe resultRecipe = searchData.searchByTitle("Steak", allRecipesList);
-//                            if (resultRecipe != null) {
-//                                Log.d("SEARCH_RESULT", "Result: " + resultRecipe.getTitle());
-//                            } else {
-//                                Log.d("SEARCH_RESULT", "Result: null ");
-//                            }
-                        } else {
-                            Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
+                    });
+        } else {
+            db.collection("recipes").whereEqualTo("tag", tag.toLowerCase()).limit(RECIPES_LIMIT).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            if (task.isSuccessful()) {
+                                getData = new ArrayList<>();
+                                for (DocumentSnapshot document : task.getResult()) {
+                                    getData.add(new Recipe(
+                                            document.getString("description"),
+                                            document.getLong("duration"),
+                                            document.getLong("date"),
+                                            document.getString("id"),
+                                            document.getString("image"),
+                                            document.getString("ingredients"),
+                                            document.getString("tag"),
+                                            document.getString("title"),
+                                            document.getString("userEmail"),
+                                            document.getString("userName")
+                                    ));
+                                }
+                                if (getData.size() == RECIPES_LIMIT) {
+                                    getData.add(new Recipe(
+                                            "",
+                                            -1,
+                                            -1,
+                                            "RECIPES_LIMIT",
+                                            "see-more-recipes.png",
+                                            "",
+                                            "more",
+                                            "More " + tag,
+                                            "",
+                                            tag
+                                    ));
+                                }
+                                setRecipeRecycle(getData, recyclerView);
+                            } else {
+                                Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+
     }
 
 }

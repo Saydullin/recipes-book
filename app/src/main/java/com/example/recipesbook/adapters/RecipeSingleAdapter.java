@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.recipesbook.R;
 import com.example.recipesbook.RecipeItemFull;
-import com.example.recipesbook.RecipeSingleItem;
 import com.example.recipesbook.db.PictureManager;
 import com.example.recipesbook.models.Recipe;
 

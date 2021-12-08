@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.recipesbook.db.CookLaterManager;
 import com.example.recipesbook.db.RecipeManager;
 
 /**

@@ -1,19 +1,11 @@
 package com.example.recipesbook.db;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.example.recipesbook.MainActivity;
 import com.example.recipesbook.models.Recipe;
-import com.example.recipesbook.utils.SearchData;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +46,6 @@ public class GetData {
                             ));
                         }
                         recipeManager.addToAll(getData);
-                        Toast.makeText(context, "All data got successfully", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
                     }
