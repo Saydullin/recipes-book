@@ -7,32 +7,58 @@
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/border_radius.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/button_pressed.xml" value="0.290625" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/filter.xml" value="0.26296296296296295" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_authors.xml" value="0.2740740740740741" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_basket.xml" value="0.28615384615384615" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_burger.xml" value="0.2740740740740741" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_desseticon.xml" value="0.28615384615384615" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_dietary.xml" value="0.2740740740740741" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_drinks.xml" value="0.2740740740740741" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_filter.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_image_1.xml" value="0.28425925925925927" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.28425925925925927" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_other_recipe.xml" value="0.2740740740740741" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_plus.xml" value="0.28615384615384615" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_recipe_image.xml" value="0.28425925925925927" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_salad.xml" value="0.28615384615384615" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_sauce.xml" value="0.2740740740740741" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_seafood.xml" value="0.2740740740740741" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/ic_soupicon.xml" value="0.28615384615384615" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/icon_pressed.xml" value="0.2722222222222222" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/main_button.xml" value="0.290625" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/profile.xml" value="0.26296296296296295" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/radiusly.xml" value="0.290625" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/search.xml" value="0.26296296296296295" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/drawable/spinner.xml" value="0.28615384615384615" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/font/montserrat_bold.xml" value="0.3" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout-v26/activity_add_recipe.xml" value="0.1765625" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.17637215528781794" />
-        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_add_recipe.xml" value="0.2509057971014493" />
-        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_login.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout-w936dp/activity_login.xml" value="0.205859375" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_add_recipe.xml" value="0.264" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_basket.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_recipe_add.xml" value="0.2509057971014493" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_recipe_item.xml" value="0.264" />
-        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_user_profile.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_recipe_item_full.xml" value="0.264" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_recipe_item_later.xml" value="0.2" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_recipe_single_item.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_splash_screen.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_tag_list_recipes.xml" value="0.26992753623188404" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/activity_user_profile.xml" value="0.264" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/button.xml" value="0.264" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/content_refe.xml" value="0.27355072463768115" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/login.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/recipe_item.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/recipe_item_view.xml" value="0.2554347826086957" />
+        <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/layout/recipe_single_item.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.290625" />
         <entry key="..\:/Users/saydu/AndroidStudioProjects/RecipesBook/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.21354166666666666" />
       </map>
     </option>
+  </component>
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop" />
+    <option name="OPTION_INCLUDE_LIBS" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

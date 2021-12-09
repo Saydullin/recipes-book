@@ -2,38 +2,89 @@ package com.example.recipesbook;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.recipesbook.db.RecipeManager;
+
+/**
+ * This is recipe view item
+ */
 
 public class RecipeItem extends AppCompatActivity {
 
     ImageView imageFullPreview;
+    Button cancelButton, cookLaterButton;
+    TextView recipeTitle, recipeDuration, recipeDescription, recipeIngredients, recipeAuthor, recipeDate;
+    RecipeManager recipeManager;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_item);
 
-        TextView recipeTitle = findViewById(R.id.recipeTitle);
+        cookLaterButton = findViewById(R.id.cook_later_button);
         imageFullPreview = findViewById(R.id.imageFullPreview);
-        TextView recipeDuration = findViewById(R.id.recipeDuration);
-        TextView recipeDescription = findViewById(R.id.recipeDescription);
-        Button recipe_item_button = findViewById(R.id.recipe_item_button);
+
+        recipeDate = findViewById(R.id.recipeDate);
+        recipeAuthor = findViewById(R.id.recipeAuthor);
+        recipeTitle = findViewById(R.id.recipeTitle);
+        recipeDuration = findViewById(R.id.recipeDuration);
+        recipeDescription = findViewById(R.id.recipeDescription);
+        recipeIngredients = findViewById(R.id.recipeIngredients);
+        cancelButton = findViewById(R.id.recipe_item_button);
+
+        String intentImage = getIntent().getStringExtra("recipeImage");
+        String intentTitle = getIntent().getStringExtra("recipeTitle");
+        String intentDate = getIntent().getStringExtra("recipeDate");
+        String intentDateLong = getIntent().getStringExtra("recipeDateLong");
+        String intentAuthor = "By " + getIntent().getStringExtra("recipeAuthor");
+        String intentDurationLong = getIntent().getStringExtra("recipeDurationLong");
+        String intentDuration = getIntent().getStringExtra("recipeDuration");
+        String intentDescription = getIntent().getStringExtra("recipeDescription");
+        String intentIngredients = getIntent().getStringExtra("recipeIngredients");
+        String intentTag = getIntent().getStringExtra("recipeTag");
+        String intentId = getIntent().getStringExtra("recipeId");
 
         Glide.with(this)
-                .load(getIntent().getStringExtra("recipeImage"))
+                .load(intentImage)
                 .into(imageFullPreview);
-        recipeTitle.setText(getIntent().getStringExtra("recipeTitle"));
-        recipeDuration.setText(getIntent().getStringExtra("recipeDuration"));
-        recipeDescription.setText(getIntent().getStringExtra("recipeDescription"));
+        recipeDate.setText("Published on " + intentDate);
+        recipeTitle.setText(intentTitle);
+        recipeAuthor.setText(intentAuthor);
+        recipeDuration.setText(intentDuration);
+        recipeDescription.setText(intentDescription);
+        recipeIngredients.setText(intentIngredients);
 
-        recipe_item_button.setOnClickListener(v -> finish());
+        cancelButton.setOnClickListener(v -> finish());
+
+        cookLaterButton.setOnClickListener(v -> {
+            recipeManager = new RecipeManager(this);
+            long dateLong = Long.parseLong(intentDateLong);
+            long durationLong = 452362920;
+
+            recipeManager.addToLater(
+                    durationLong,
+                    dateLong,
+                    intentImage,
+                    intentTitle,
+                    intentIngredients,
+                    intentDescription,
+                    intentTag,
+                    intentId
+            );
+            Toast.makeText(this, "Recipe added to Cook Later list", Toast.LENGTH_SHORT).show();
+            finish();
+        });
 
     }
+
 }
 
 

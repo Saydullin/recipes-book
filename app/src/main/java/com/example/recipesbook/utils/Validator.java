@@ -1,15 +1,8 @@
 package com.example.recipesbook.utils;
 
-import android.content.Context;
-
 public class Validator {
 
     boolean isCorrect = true;
-    Context context;
-
-    public Validator(Context context) {
-        this.context = context;
-    }
 
     public void checkInt(String name, int value, int[] minMax) throws Exception {
 

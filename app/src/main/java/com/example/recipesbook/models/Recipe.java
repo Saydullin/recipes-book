@@ -1,17 +1,76 @@
 package com.example.recipesbook.models;
 
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Recipe {
 
-    int id, ingredientsAmount;
-    String title, img, duration, description;
+    long duration, date;
+    String description, id, image, ingredients, tag, title, userEmail, userName;
 
-    public Recipe(int id, int ingredientsAmount, String title,  String duration, String img, String description) {
+    public Recipe(
+            String description,
+            long duration,
+            long date,
+            String id,
+            String image,
+            String ingredients,
+            String tag,
+            String title,
+            String userEmail,
+            String userName
+    ) {
         this.id = id;
-        this.img = img;
+        this.tag = tag;
+        this.date = date;
+        this.image = image;
         this.title = title;
         this.duration = duration;
-        this.ingredientsAmount = ingredientsAmount;
+        this.userEmail = userEmail;
+        this.userName = userName;
+        this.ingredients = ingredients;
         this.description = description;
+    }
+
+    public long getDateLong() {
+        return date;
+    }
+
+    public String getDate() {
+        Date netDate = new Date(System.currentTimeMillis());
+        SimpleDateFormat sfd = new SimpleDateFormat("dd MMMM', at' HH:mm", Locale.forLanguageTag("en"));
+        return sfd.format(netDate);
+    }
+
+    public void setDate(long date) {
+        this.date = date;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getDescription() {
@@ -22,20 +81,20 @@ public class Recipe {
         this.description = description;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getImg() {
-        return img;
+    public String getImage() {
+        return image;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImage(String img) {
+        this.image = img;
     }
 
     public String getTitle() {
@@ -46,19 +105,35 @@ public class Recipe {
         this.title = title;
     }
 
-    public String getDuration() {
+    public long getLongDuration() {
         return duration;
     }
 
-    public void setDuration(String date) {
+    public String getDuration() {
+        StringBuilder durationFormat = new StringBuilder();
+        String pluralHours = duration / 60 > 1 ? "hours " : "hour ";
+        String pluralMinutes = duration % 60 > 1 ? "minutes" : "minute";
+
+        if (duration / 60 >= 1) {
+            durationFormat.append(duration / 60).append(" ").append(pluralHours);
+        }
+        if (duration % 60 >= 1) {
+            durationFormat.append(duration % 60).append(" ").append(pluralMinutes);
+        }
+
+        return durationFormat.toString();
+    }
+
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
-    public int getIngredientsAmount() {
-        return ingredientsAmount;
+    public String getIngredients() {
+        return ingredients;
     }
 
-    public void setIngredientsAmount(int ingredientsAmount) {
-        this.ingredientsAmount = ingredientsAmount;
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
+
 }

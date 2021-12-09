@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
         android:paddingVertical="15dp"
-        tools:context=".AddRecipe">
+        tools:context=".AddRecipe"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView5"
@@ -20,134 +21,195 @@
             android:layout_marginVertical="15dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/user_profile_title"
+            android:layout_gravity="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/inputsList"
+            android:id="@+id/signed_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginVertical="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/image"
-                android:fontFamily="@font/montserrat"
-                android:textSize="14sp" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="5dp">
-
-                <ImageView
-                    android:id="@+id/recipeImagePreview"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/ic_food_preview"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/add_new_recipe" />
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/user_name_text"
-                android:fontFamily="@font/montserrat"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/recipeTitle"
+            <LinearLayout
+                android:id="@+id/inputsList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="default"
-                android:background="@drawable/border_radius"
-                android:backgroundTint="@color/theme_bg_light"
-                android:fontFamily="@font/montserrat"
-                android:hint="@string/user_name_text_ex"
-                android:inputType="text"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="15dp"
-                android:textSize="16sp" />
+                android:orientation="horizontal"
+                android:layout_marginVertical="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/prompt_email"
-                android:fontFamily="@font/montserrat"
-                android:textSize="14sp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="100dp">
 
-            <EditText
-                android:id="@+id/recipeIngredientsAmount"
+                    <ImageView
+                        android:id="@+id/userImagePreview"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_food_preview"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/add_new_recipe" />
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/userInfos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_name_text"
+                        android:fontFamily="@font/montserrat"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="3dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/user_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email_text"
+                        android:fontFamily="@font/montserrat"
+                        android:paddingHorizontal="15dp"
+                        android:alpha="0.7"
+                        android:paddingVertical="3dp"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="default"
-                android:gravity="start"
-                android:background="@drawable/border_radius"
-                android:backgroundTint="@color/theme_bg_light"
-                android:fontFamily="@font/montserrat"
-                android:hint="@string/user_email_text_ex"
-                android:inputType="textEmailAddress"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="15dp"
-                android:textSize="16sp" />
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/sign_out_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/sign_out"
+                    android:backgroundTint="@color/design_default_color_error"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/change_accounts_button"
+                    android:paddingHorizontal="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/button_accent"
+                    android:textColor="@color/white"
+                    android:layout_marginVertical="15dp"
+                    android:text="@string/change_account"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button_forgot_pass"
+        <LinearLayout
+            android:id="@+id/no_signed_in"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginVertical="15dp"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/forgot_pass_text"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputsList" />
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/no_signed_in"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="15dp"
+                android:text="@string/sign_in_by_google" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/myRecipesList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/my_recipes_text"
+                android:gravity="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myRecipesRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/textViewResult" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginVertical="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_forgot_pass">
+            app:layout_constraintTop_toBottomOf="@+id/sign_out_button">
 
             <Button
                 android:id="@+id/button_cancel_activity"
-                style="?android:attr/buttonBarButtonStyle"
+                android:paddingHorizontal="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/cancel_text" />
-
-            <Button
-                android:id="@+id/submit_add_recipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:fontFamily="@font/montserrat"
-                android:text="@string/submit_button" />
+                android:text="@string/cancel_text"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </ScrollView>

@@ -1,37 +1,40 @@
 package com.example.recipesbook.adapters;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.recipesbook.R;
 import com.example.recipesbook.RecipeItem;
+import com.example.recipesbook.db.PictureManager;
 import com.example.recipesbook.models.Recipe;
-
 import java.util.List;
 
+/**
+ * The RecipesAdapter for the Application
+ * @author Saydullin
+ * @version 1.1
+ * This is not the first Screen of the user
+ */
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder> {
 
     Context context;
     List<Recipe> recipes;
+    PictureManager pictureManager;
 
     public RecipesAdapter(Context context, List<Recipe> recipes) {
         this.context = context;
         this.recipes = recipes;
+        this.pictureManager = new PictureManager(context);
     }
 
     @NonNull
@@ -41,33 +44,49 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         return new RecipesViewHolder(RecipesItem);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull RecipesViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull RecipesViewHolder holder, int position) {
+
+        String picturePath = "https://firebasestorage.googleapis.com/v0/b/recipes-book-1637352602907.appspot.com/o/images%2F" + recipes.get(position).getImage() + "?alt=media&token=4130be0a-d3ea-419e-b388-f25d07499f22";
+
+        holder.recipeTitle.setText(recipes.get(position).getTitle());
         holder.recipeTitle.setText(recipes.get(position).getTitle());
         Glide.with(context)
-                .load(recipes.get(position).getImg())
+                .load(picturePath)
                 .into(holder.recipeImage);
-//        holder.recipeImage.setImageURI(Uri.parse(recipes.get(position).getImg()));
-        holder.recipeDuration.setText(recipes.get(position).getDuration());
-        holder.recipesIngredientsAmount.setText(recipes.get(position).getIngredientsAmount() + " ingredients");
 
-        holder.itemView.setOnClickListener(v -> {
+        if (recipes.get(position).getId().equals("RECIPES_LIMIT")) {
+            String authorText = "Category " + recipes.get(position).getUserName();
+            holder.recipeAuthor.setText(authorText);
+            holder.itemView.setOnClickListener(v -> {
+                Toast.makeText(context, "See more", Toast.LENGTH_SHORT).show();
+            });
             Intent intent = new Intent(context, RecipeItem.class);
+            intent.putExtra("tag", recipes.get(position).getUserName());
+            context.startActivity(intent);
+        } else {
+            String authorText = "By " + recipes.get(position).getUserName();
+            holder.recipeDuration.setText(recipes.get(position).getDuration().trim());
+            holder.recipeAuthor.setText(authorText);
 
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
-                    (Activity) context,
-                    new Pair<View, String>(holder.recipeImageCard, "ImageTransform")
-            );
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, RecipeItem.class);
 
-            intent.putExtra("recipeImage", recipes.get(position).getImg());
-            intent.putExtra("recipeTitle", recipes.get(position).getTitle());
-            intent.putExtra("recipeDuration", recipes.get(position).getDuration());
-            intent.putExtra("recipeIngredients", recipes.get(position).getIngredientsAmount());
-            intent.putExtra("recipeDescription", recipes.get(position).getDescription());
+                intent.putExtra("recipeImage", picturePath);
+                intent.putExtra("recipeAuthor", recipes.get(position).getUserName());
+                intent.putExtra("recipeDate", recipes.get(position).getDate());
+                intent.putExtra("recipeDateLong", String.valueOf(recipes.get(position).getDateLong()));
+                intent.putExtra("recipeTitle", recipes.get(position).getTitle());
+                intent.putExtra("recipeDurationLog", String.valueOf(recipes.get(position).getLongDuration()));
+                intent.putExtra("recipeDuration", String.valueOf(recipes.get(position).getDuration()));
+                intent.putExtra("recipeDescription", recipes.get(position).getDescription());
+                intent.putExtra("recipeIngredients", recipes.get(position).getIngredients());
+                intent.putExtra("recipeTag", recipes.get(position).getTag());
+                intent.putExtra("recipeId", recipes.get(position).getId());
 
-            context.startActivity(intent, options.toBundle());
-        });
+                context.startActivity(intent);
+            });
+        }
     }
 
     @Override
@@ -79,9 +98,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
 
         TextView recipeTitle;
         TextView recipeDuration;
-        TextView recipesIngredientsAmount;
+        TextView recipeAuthor;
         ImageView recipeImage;
-        CardView recipeImageCard;
 
         public RecipesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -89,8 +107,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
             recipeTitle = itemView.findViewById(R.id.recipeTitle);
             recipeImage = itemView.findViewById(R.id.recipeImage);
             recipeDuration = itemView.findViewById(R.id.recipeDuration);
-            recipeImageCard = itemView.findViewById(R.id.CardImage);
-            recipesIngredientsAmount = itemView.findViewById((R.id.recipesIngredientsAmount));
+            recipeAuthor = itemView.findViewById(R.id.recipeAuthor);
 
         }
     }
